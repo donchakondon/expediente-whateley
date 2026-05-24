@@ -1,433 +1,563 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#1a1108">
-  <meta name="description" content="Expediente clasificado de la Corona Británica — Caso Blackmoor, 1889.">
-  <title>Expediente Whateley</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0c0a07">
+<title>Expediente Whateley — Caso Blackmoor, 1889</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --ink:#e9ddc4; --paper:#ece2cc; --paper2:#ddcfa8;
+ --brown:#0c0a07; --brown2:#1a1410; --gold:#c79a3e; --gold-soft:#e3b85a;
+ --oxblood:#7c1f1a; --green:#3a4632;
+}
+html,body{background:#0c0a07;height:100%}
+body{font-family:'Crimson Text',Georgia,serif;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.app{max-width:480px;margin:0 auto;min-height:100vh;position:relative;background:#0c0a07;overflow:hidden}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+/* ---------- shared ---------- */
+.view{display:none}
+.view.on{display:block;animation:fade .5s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.serif{font-family:'Cormorant Garamond',serif}
+.hand{font-family:'Caveat',cursive}
 
-  <link rel="stylesheet" href="base.css">
-  <link rel="stylesheet" href="layout.css">
-  <link rel="stylesheet" href="components.css">
-  <link rel="stylesheet" href="animations.css">
+/* candle / dust ambience */
+.dust{position:absolute;inset:0;pointer-events:none;z-index:6;opacity:.5;
+ background-image:radial-gradient(1.5px 1.5px at 20% 30%,rgba(231,210,160,.5),transparent),radial-gradient(1.5px 1.5px at 70% 60%,rgba(231,210,160,.4),transparent),radial-gradient(1px 1px at 45% 80%,rgba(231,210,160,.4),transparent),radial-gradient(1px 1px at 85% 25%,rgba(231,210,160,.35),transparent);
+ animation:drift 14s linear infinite}
+@keyframes drift{from{transform:translateY(0)}to{transform:translateY(-26px)}}
+
+/* ---------- ENTRY (the table) ---------- */
+#entry{position:relative;min-height:100vh}
+.mesa-wrap{position:relative;width:100%}
+.mesa{display:block;width:100%;height:auto}
+.entry-top{position:absolute;top:0;left:0;right:0;z-index:8;padding:16px 18px 30px;
+ background:linear-gradient(180deg,rgba(8,6,4,.9),rgba(8,6,4,.55) 60%,transparent);text-align:center}
+.entry-kicker{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);font-weight:600}
+.entry-line{font-size:12.5px;color:#bdae8c;margin-top:7px;line-height:1.5;font-style:italic;padding:0 6px}
+.lang{display:flex;gap:0;justify-content:center;margin-top:11px}
+.lang button{font-family:'Cormorant Garamond',serif;font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:#8a7c5c;background:none;border:none;padding:3px 11px;cursor:pointer}
+.lang button.on{color:var(--gold-soft)}
+.lang .sep{color:#5a4f3a;align-self:center}
+
+/* hotspots over the table objects */
+.hot{position:absolute;cursor:pointer;z-index:7;border:none;background:transparent;padding:0}
+.hot .halo{position:absolute;inset:-6% -8%;border-radius:50%;
+ background:radial-gradient(ellipse,rgba(231,180,90,.34),rgba(231,180,90,.07) 55%,transparent 72%);
+ animation:breathe 3.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1.06)}}
+.hot .tag{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;
+ font-family:'Cormorant Garamond',serif;font-weight:700;font-size:13px;letter-spacing:1.6px;
+ color:#f0e3bf;text-shadow:0 2px 8px #000,0 0 12px rgba(0,0,0,.9);text-transform:uppercase}
+.hot .tag.below{top:100%;margin-top:2px}
+.hot .tag.above{bottom:100%;margin-bottom:2px}
+.hot:active{transform:scale(.97)}
+.hot.decreto{left:22%;top:24%;width:56%;height:17%}
+.hot.decreto .tag{top:-6px}
+.hot.informe{left:24%;top:40%;width:54%;height:26%}
+.hot.archivo{left:25%;top:72%;width:52%;height:23%}
+.hot .lock{position:absolute;right:8%;top:6%;width:24px;height:24px;border-radius:50%;
+ background:var(--oxblood);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px #000}
+.hot.done .lock{background:var(--gold)}
+.hot .lock svg{width:13px;height:13px}
+
+/* edge vignette on entry */
+.vig{position:absolute;inset:0;z-index:5;pointer-events:none;
+ box-shadow:inset 0 0 120px 40px rgba(8,6,4,.95)}
+
+/* ---------- DOCUMENT VIEWS ---------- */
+.doc{min-height:100vh;padding:0 0 60px}
+.docbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;
+ padding:13px 16px;background:rgba(12,10,7,.93);border-bottom:1px solid #2a2114;backdrop-filter:blur(3px)}
+.back{display:flex;align-items:center;gap:6px;font-family:'Cormorant Garamond',serif;font-size:13px;
+ font-weight:700;letter-spacing:1px;color:var(--gold-soft);background:none;border:none;cursor:pointer}
+.back svg{width:15px;height:15px}
+.docbar .dt{flex:1;text-align:right;font-family:'Cormorant Garamond',serif;font-size:13px;
+ letter-spacing:2px;text-transform:uppercase;color:#7a6c4c}
+
+/* parchment sheet */
+.sheet{margin:20px 14px;padding:30px 24px 36px;position:relative;border-radius:3px;
+ background:linear-gradient(160deg,#efe6cf,#e2d4ac 55%,#d3c191);
+ color:#2a2014;box-shadow:0 14px 40px rgba(0,0,0,.7),inset 0 0 70px rgba(120,86,40,.28);
+ background-blend-mode:multiply}
+.sheet::before{content:"";position:absolute;inset:0;border-radius:3px;pointer-events:none;
+ box-shadow:inset 0 0 38px rgba(70,48,20,.5);
+ background-image:radial-gradient(circle at 14% 12%,rgba(110,80,38,.22),transparent 26%),radial-gradient(circle at 88% 84%,rgba(90,62,28,.26),transparent 30%)}
+.sheet>*{position:relative}
+.crest{text-align:center;margin-bottom:6px}
+.crest svg{width:46px;height:46px;color:#7a5a22}
+.kicker{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:14px;color:#6a4f24;letter-spacing:.5px}
+.dtitle{text-align:center;font-family:'Cormorant Garamond',serif;font-weight:700;
+ font-size:27px;line-height:1.15;margin:5px 0 3px;color:#241a0e}
+.dsub{text-align:center;font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:2px;
+ text-transform:uppercase;color:#7a5a2e}
+.rule{height:1px;margin:16px auto;width:74%;background:linear-gradient(90deg,transparent,#8a6a32,transparent)}
+.sheet p{font-size:16.5px;line-height:1.66;margin:11px 0;color:#33271680}
+.sheet p{color:#312614}
+.sheet p.indent{text-indent:18px}
+.sign{text-align:right;margin-top:20px}
+.sign .nm{font-family:'Caveat',cursive;font-size:34px;color:#5a1a14;line-height:1}
+.sign .rl{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:2px;
+ text-transform:uppercase;color:#7a5a2e;margin-top:2px}
+
+/* highlighted key phrase box */
+.keybox{margin:22px 4px 6px;padding:16px 18px;text-align:center;border:1.5px solid #9c3a2a;
+ background:rgba(150,40,28,.1);border-radius:2px;position:relative}
+.keybox .lbl{font-family:'Cormorant Garamond',serif;font-size:10.5px;letter-spacing:3px;
+ text-transform:uppercase;color:#8a3024;margin-bottom:6px}
+.keybox .phrase{font-family:'Cormorant Garamond',serif;font-weight:700;font-style:italic;
+ font-size:20px;line-height:1.3;color:#6e1d16}
+.hl{font-weight:700;color:#7c1f1a;font-style:normal;background:rgba(160,50,32,.16);
+ padding:0 4px;border-radius:2px}
+.hl-num{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.18em;color:#7c1f1a;
+ letter-spacing:1px;border-bottom:2px solid #9c3a2a;padding:0 3px}
+
+/* wax seal */
+.wax{width:74px;height:74px;margin:18px auto 0;border-radius:50%;
+ background:radial-gradient(circle at 38% 34%,#a8362a,#6e1812 70%,#4a0f0b);
+ display:flex;align-items:center;justify-content:center;
+ box-shadow:0 6px 16px rgba(0,0,0,.5),inset 0 -4px 10px rgba(0,0,0,.5);transform:rotate(-8deg)}
+.wax svg{width:38px;height:38px;color:#e9c089;opacity:.92}
+
+/* report sections */
+.report .seg{margin:18px 0}
+.report .sh{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:18px;
+ color:#3a2a12;letter-spacing:.5px;margin-bottom:3px}
+.report .sh::before{content:"§ ";color:#9a7838}
+.report .seg.emph p{font-style:italic;color:#5a2418}
+.closing{margin:22px 4px 0;padding:15px 16px;text-align:center;border-top:1px solid #9a7838;
+ border-bottom:1px solid #9a7838;font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:17.5px;line-height:1.4;color:#5a2418}
+
+/* ---------- ARCHIVO / COFRE ---------- */
+.arch{min-height:100vh;padding:0 0 60px}
+.arch-inner{padding:8px 18px 0;text-align:center}
+.arch h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:25px;color:#e9ddc4;margin-top:6px}
+.arch .note{font-size:13.5px;color:#9a8c68;line-height:1.55;margin:9px 4px 0;font-style:italic}
+.cofre-stage{position:relative;margin:14px auto 0;width:100%;max-width:380px}
+.cofre-img{display:block;width:100%;height:auto;border-radius:4px;filter:brightness(.92)}
+.cofre-stage.shake{animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+.cofre-stage.opened .cofre-img{filter:brightness(1.08) saturate(1.1)}
+.glowburst{position:absolute;inset:0;border-radius:4px;pointer-events:none;opacity:0;
+ background:radial-gradient(ellipse at 50% 42%,rgba(231,184,90,.85),transparent 60%)}
+.cofre-stage.opened .glowburst{animation:burst 1.3s ease}
+@keyframes burst{0%{opacity:0}40%{opacity:1}100%{opacity:0}}
+
+/* symbol row */
+.symrow{display:flex;justify-content:center;gap:9px;margin:16px 0 4px}
+.sym{width:50px;height:50px;border-radius:9px;border:1.5px solid #5a4322;
+ background:linear-gradient(160deg,#241c10,#15100a);display:flex;align-items:center;justify-content:center;
+ cursor:pointer;transition:transform .12s,box-shadow .25s,border-color .25s;padding:0}
+.sym svg{width:26px;height:26px;color:#9a8048;transition:color .2s}
+.sym:active{transform:scale(.9)}
+.sym.lit{border-color:var(--gold);box-shadow:0 0 16px rgba(199,154,62,.7),inset 0 0 12px rgba(199,154,62,.4)}
+.sym.lit svg{color:var(--gold-soft)}
+.seqdots{display:flex;justify-content:center;gap:7px;margin-top:12px;height:10px}
+.seqdots i{width:9px;height:9px;border-radius:50%;background:#2e2616;border:1px solid #4a3a1e;display:block}
+.seqdots i.fill{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(199,154,62,.7)}
+.archmsg{min-height:20px;margin-top:13px;font-family:'Cormorant Garamond',serif;font-size:14.5px;
+ letter-spacing:.5px;font-style:italic}
+.archmsg.err{color:#c25a4a}
+.archmsg.ok{color:var(--gold-soft)}
+.cofre-reset{margin-top:10px;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:1.5px;
+ text-transform:uppercase;color:#8a7c5c;background:none;border:1px solid #3a3018;border-radius:7px;
+ padding:8px 16px;cursor:pointer}
+
+/* unlocked content */
+.reveal{display:none}
+.reveal.on{display:block;animation:fade .7s ease}
+.letter{margin:20px 14px;padding:28px 22px 32px;border-radius:3px;position:relative;
+ background:linear-gradient(155deg,#e7dcc0,#d8c79c 60%,#c9b485);color:#2a2014;
+ box-shadow:0 14px 40px rgba(0,0,0,.7),inset 0 0 60px rgba(110,78,36,.34)}
+.letter::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:3px;
+ box-shadow:inset 0 0 34px rgba(70,48,20,.55)}
+.letter>*{position:relative}
+.letter .lh{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:19px;color:#241a0e;text-align:center}
+.letter .ls{text-align:center;font-size:12px;font-style:italic;color:#6a4f24;margin:4px 0 6px;line-height:1.5}
+.letter p{font-family:'Caveat',cursive;font-size:21px;line-height:1.5;margin:9px 0;color:#36240f}
+.letter .lsign{font-family:'Caveat',cursive;font-size:32px;color:#3a1a0c;text-align:right;margin-top:14px}
+.sheetimg{margin:20px 14px}
+.sheetimg img{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 14px 40px rgba(0,0,0,.7)}
+.sheetcap{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;
+ font-size:12.5px;color:#9a8c68;margin-top:8px;line-height:1.5}
+.seed{text-align:center;margin:24px 18px 8px;font-family:'Cormorant Garamond',serif;
+ font-style:italic;font-size:15px;color:#7c6a44;line-height:1.55}
+
+.foot{text-align:center;font-family:'Cormorant Garamond',serif;font-size:10.5px;
+ letter-spacing:2px;text-transform:uppercase;color:#4a4030;padding:26px 20px 16px}
+</style>
 </head>
 <body>
+<div class="app">
 
-  <!-- ========================================== -->
-  <!-- ROUTE: ENTRY                                -->
-  <!-- ========================================== -->
-  <section class="route route-entry is-active" data-route="entry">
-    <div class="entry-vignette"></div>
-    <div class="entry-dust"></div>
+<!-- ================= ENTRY / TABLE ================= -->
+<div class="view on" id="entry">
+ <div class="entry-top">
+  <div class="entry-kicker" id="eKicker">Clasificado · Caso Blackmoor 1889</div>
+  <div class="entry-line" id="eLine">—</div>
+  <div class="lang">
+   <button id="langEs" class="on">ES</button><span class="sep">·</span><button id="langEn">EN</button>
+  </div>
+ </div>
+ <div class="mesa-wrap">
+  <img class="mesa" src="mesa.jpg" alt="">
+  <button class="hot decreto" id="hotDecreto"><span class="halo"></span><span class="tag" id="tagDecreto">Decreto Real</span></button>
+  <button class="hot informe" id="hotInforme"><span class="halo"></span><span class="tag below" id="tagInforme">Informe de Ashton</span></button>
+  <button class="hot archivo" id="hotArchivo"><span class="halo"></span><span class="tag above" id="tagArchivo">Archivo Restringido</span><span class="lock" id="archLock"></span></button>
+  <div class="vig"></div>
+ </div>
+ <div class="dust"></div>
+</div>
 
-    <div class="entry-candle">
-      <div class="candle-flame"></div>
-      <div class="candle-glow"></div>
-    </div>
+<!-- ================= DECRETO ================= -->
+<div class="view" id="vDecreto">
+ <div class="docbar"><button class="back" data-back>‹ <span data-back-label>Volver a la mesa</span></button><div class="dt">I · Decreto</div></div>
+ <div class="doc"><div class="sheet" id="decretoSheet"></div></div>
+ <div class="dust"></div>
+</div>
 
-    <div class="entry-content">
-      <div class="entry-seal">
-        <span class="seal-text" data-i18n="entry.classified">CLASIFICADO</span>
-      </div>
+<!-- ================= INFORME ================= -->
+<div class="view" id="vInforme">
+ <div class="docbar"><button class="back" data-back>‹ <span data-back-label>Volver a la mesa</span></button><div class="dt">II · Informe</div></div>
+ <div class="doc"><div class="sheet report" id="informeSheet"></div></div>
+ <div class="dust"></div>
+</div>
 
-      <h1 class="entry-title">
-        <span class="title-line title-small" data-i18n="entry.headerSmall">Expediente Oficial</span>
-        <span class="title-line title-main">Whateley</span>
-        <span class="title-line title-meta" data-i18n="entry.headerMeta">Caso Blackmoor · 1889</span>
-      </h1>
+<!-- ================= ARCHIVO / COFRE ================= -->
+<div class="view" id="vArchivo">
+ <div class="docbar"><button class="back" data-back>‹ <span data-back-label>Volver a la mesa</span></button><div class="dt">III · Archivo</div></div>
+ <div class="arch">
+  <div class="arch-inner" id="archLockedView">
+   <h2 id="aLockedTitle">Cofre Sellado</h2>
+   <div class="note" id="aLockedBody">—</div>
+   <div class="cofre-stage" id="cofreStage">
+    <img class="cofre-img" src="cofre.jpg" alt="">
+    <div class="glowburst"></div>
+   </div>
+   <div class="symrow" id="symRow"></div>
+   <div class="seqdots" id="seqDots"></div>
+   <div class="archmsg" id="archMsg"></div>
+   <button class="cofre-reset" id="cofreReset">Reiniciar</button>
+  </div>
+  <div class="reveal" id="archReveal"></div>
+ </div>
+ <div class="dust"></div>
+</div>
 
-      <p class="entry-subtitle" data-i18n="entry.subtitle">
-        Documento recopilado por orden de Su Majestad. Acceso restringido al portador.
-      </p>
+</div>
+<script>
+(function(){
+"use strict";
 
-      <div class="entry-lang">
-        <button type="button" class="lang-btn is-active" data-lang="es" aria-label="Español">ES</button>
-        <span class="lang-divider">·</span>
-        <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
-      </div>
+/* ---------------- ICONS ---------------- */
+var IC={
+ crown:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 8l3.5 3L12 4l5.5 7L21 8l-1.5 11h-15L3 8zm2.6 9h12.8l.5-3.7-2.2 1.9L12 8.6 7.3 15.1 5.1 13.3 5.6 17z"/></svg>',
+ back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+ lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+ check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg>'
+};
+/* symbol shapes */
+function poly(n,rot){var p='',cx=12,cy=12,r=9;for(var i=0;i<n;i++){var a=(Math.PI*2*i/n)-Math.PI/2+(rot||0);p+=(i?' ':'')+(cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1);}return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="'+p+'"/></svg>';}
+var SYM={
+ circulo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>',
+ triangulo:poly(3,0),
+ cuadrado:poly(4,Math.PI/4),
+ pentagono:poly(5,0),
+ hexagono:poly(6,0)
+};
 
-      <button type="button" id="open-file" class="entry-cta" data-go="hub">
-        <span data-i18n="entry.cta">ABRIR EXPEDIENTE</span>
-        <span class="cta-arrow" aria-hidden="true">&#x276F;</span>
-      </button>
+/* ---------------- CONTENT ---------------- */
+var C={
+ es:{
+  langName:'ES', back:'Volver a la mesa',
+  kicker:'Clasificado · Caso Blackmoor · 1889',
+  entryLine:'Mesa del expediente. Documentos compilados por la Oficina de Investigación Especial de la Corona. Toque cualquier pieza para examinarla.',
+  labels:{decreto:'Decreto Real',informe:'Informe de Ashton',archivo:'Archivo Restringido'},
+  decreto:{
+   kicker:'Por la gracia de Dios y la voluntad del Reino',
+   title:'Decreto de Investigación Real',
+   sub:'Caso Blackmoor',
+   body:[
+    'Nós, Victoria, por la Gracia de Dios, Reina del Reino Unido de Gran Bretaña e Irlanda, Defensora de la Fe, en uso de las prerrogativas que Nos competen y a través de la Oficina de Investigaciones Especiales,',
+    '<b>ORDENAMOS:</b>',
+    '<i>Primero.</i> Que se autorice a la presente delegación de investigadores el acceso pleno e inmediato a la comarca de Blackmoor, su parroquia, su posada y cuanta propiedad esté inscrita a nombre de la familia Whateley, incluido sin restricción el mausoleo familiar.',
+    '<i>Segundo.</i> Que ninguna autoridad civil, eclesiástica o privada podrá impedir, demorar ni condicionar dicho acceso. Toda obstrucción será tenida por desacato a la Corona.',
+    '<i>Tercero.</i> Que los portadores de este Decreto quedan facultados para emplear cuanta fuerza prudente sea menester en defensa de su persona y de la integridad de su misión, e incluso para forzar la entrada del mausoleo si les fuera negada.',
+    '<i>Cuarto.</i> Que del resultado de su labor habrán de rendir cuenta directa y reservada al Despacho que suscribe.',
+    'Dado en Westminster, en los días corrientes del año del Señor de mil ochocientos ochenta y nueve.'
+   ],
+   keyLabel:'Fórmula oficial de la Corona',
+   keyPhrase:'Lo que la Corona escribe, nadie lo lee dos veces.',
+   signature:'Victoria R.', sigRole:'Reina y Defensora de la Fe'
+  },
+  informe:{
+   header:'Informe Preliminar — Caso Blackmoor',
+   sub:'Investigador C. Ashton',
+   subheader:'Redactado por el Dr. Cornelius Ashton, agente de la Oficina de Investigaciones Especiales. Remitido en agosto de 1889. Considerado parcialmente ilegible.',
+   sections:[
+    {h:'Llegada al pueblo',b:'Llegué a Blackmoor con luz de tarde y la impresión de haber atravesado una cortina invisible. Los caballos se detuvieron solos antes del puente y costó volver a hacerlos andar. El cochero no quiso seguir. Pagué el doble y tampoco. Entré a pie.'},
+    {h:'Primeras observaciones',b:'El pueblo no está vacío. Hay gente. Comen, trabajan, saludan. Pero saludan demasiado tarde, como si tuvieran que recordar que se saluda. La mujer del molinero estuvo dos horas mirando al cielo sin moverse. Cuando le pregunté qué veía, sonrió y dijo: «aún no llega».'},
+    {h:'Los desaparecidos',b:'He documentado siete casos en cuatro semanas. Todos vuelven a los tres o cuatro días, exhaustos, con tierra bajo las uñas y sin recuerdos del intervalo. El médico del pueblo los examina y los devuelve a casa sin más. Cuando pregunté por los análisis, respondió que «no hace falta tocar lo que no quiere ser tocado».'},
+    {h:'La iglesia',b:'La iglesia está cerrada con cadenas. El párroco abandonó el pueblo hace dos meses. Dejó una nota clavada en la puerta: «Dios ha dejado de escuchar en este lugar». El clavo que la sujetaba se extrajo con dificultad; la madera presentaba marcas de una profundidad incompatible con su grosor.'},
+    {h:'Las procesiones',b:'Tres veces, siempre entre la una y las tres de la madrugada, he visto una columna de vecinos atravesar el pueblo hacia el bosque, en dirección a las tierras de Whateley. Llevaban velas. Nadie hablaba. Los seguí hasta el lindero y allí me detuve, porque algo dentro de mí me dijo que un paso más y no volvería siendo el mismo.'},
+    {h:'Thomas',b:'El criado de los Whateley, Thomas, me cerró la puerta de la casa al tercer día. Antes había sido cordial. Esa última vez sus ojos no parpadearon mientras hablaba conmigo. Su voz era la suya. Lo demás, no. Tres veces intenté acceder al mausoleo. Tres veces lo impidió.'},
+    {h:'Edward Hartwell',b:'En la posada conocí a Edward Hartwell, profesor de Oxford y amigo de Lord Whateley durante veintitrés años. Es el único en Blackmoor que aún habla con claridad. Me confió que, una semana antes de morir, Whateley le entregó un pequeño cofre cerrado con el ruego de abrirlo si algo le ocurría. Ese cofre lo anexo a este expediente. Hartwell no conocía la combinación, pero insistió en una vieja broma entre ellos: ambos firmaban sus cartas con una cifra al pie, y la última, fechada el día antes de la muerte de Whateley, llevaba el número <span class="hl-num">314</span>. «Si ese cofre debe abrirse alguna vez —me dijo—, esa será la cifra.»'},
+    {h:'Confesión final',emph:true,b:'Llevo once días sin dormir más de tres horas seguidas. Oigo cosas en mi propia habitación. Me cuesta recordar el nombre de mi esposa. Esta mañana me sorprendí escribiendo en este informe palabras que no recuerdo haber pensado, en una caligrafía que no es la mía. He decidido marcharme. Suplico a quien lea esto que no demore la intervención. Ningún hombre debería entrar solo a Blackmoor.'}
+   ],
+   closing:'Lo que hay en Blackmoor no se ve. Se siente. Y cuando lo sientes, ya estás dentro.',
+   signature:'C. Ashton'
+  },
+  archivo:{
+   lockedTitle:'Cofre Sellado',
+   lockedBody:'Este compartimiento permanece cerrado por un dispositivo de cinco símbolos. Solo quien haya activado el cubo dentro de la Sala conocerá el orden correcto. Toca los símbolos en la secuencia adecuada.',
+   error:'Combinación incorrecta. El cofre permanece cerrado.',
+   success:'El cofre cede. Accede con prudencia.',
+   reset:'Reiniciar',
+   revealTitle:'Cartas Recobradas',
+   letterHeader:'Carta personal de Lord Aldous Whateley',
+   letterSub:'Hallada en el doble fondo del escritorio del estudio. Letra temblorosa, varias correcciones, restos de cera.',
+   letterBody:[
+    'Edward, viejo amigo:',
+    'Si lees esto, ya estaré muerto. No me apena. He tenido tiempo de hacer las paces con la idea, aunque no con la causa.',
+    'Tenía razón Azrael. Me reí de él, que era el único que vigilaba de verdad, y lo despedí pensándolo supersticioso. Hoy sé que era el último guardián que me quedaba en esta casa, y yo, por orgullo, le cerré la puerta.',
+    'Te escribo sobre Thomas. Has de saberlo: lo que se sienta a mi mesa ya no es Thomas. Quedan gestos suyos, sí, pero detrás de los ojos hay otra cosa que le susurra y le promete libertad a cambio de pequeñas obediencias. Y Thomas, mi pobre Thomas, las cumple.',
+    'Sé cómo terminará. No por revelación ni por sueño: por lógica. Lo que se ha apoderado de él me necesita callado, y a Thomas le bastará un instante de manos firmes. No le tendré miedo. Le conozco desde niño. Merece que le mire a la cara cuando ocurra, aunque no sea él quien me mire de vuelta.',
+    'Perdóname tú, que sí me quisiste sin condiciones. Y guarda este cofre. Entrégalo a quien venga a investigar mi muerte. Lo que hay dentro ya no es mío: es un aviso.',
+    'Gracias por todo. Y por lo que vendrá.'
+   ],
+   letterSign:'Aldous',
+   sheetHeader:'Hoja adjunta',
+   sheetSub:'Doblada dentro de la carta. Dibujo a lápiz tembloroso, anotaciones rotas, un croquis al margen. Whateley pidió que no se mirase mucho rato.',
+   sheetCap:'Dibujo sin firmar y croquis parcial. La X no figura en ningún mapa conocido.',
+   seed:'El expediente termina aquí. Lo que Whateley dibujó en sus últimos días no era un recuerdo. Era un lugar. Y un lugar puede visitarse.'
+  }
+ },
+ en:{
+  langName:'EN', back:'Back to the table',
+  kicker:'Classified · Blackmoor Case · 1889',
+  entryLine:'The dossier table. Documents compiled by the Crown’s Office of Special Investigation. Tap any piece to examine it.',
+  labels:{decreto:'Royal Decree',informe:'Ashton’s Report',archivo:'Restricted Archive'},
+  decreto:{
+   kicker:'By the Grace of God and the Will of the Realm',
+   title:'Decree of Royal Investigation',
+   sub:'Blackmoor Case',
+   body:[
+    'We, Victoria, by the Grace of God, Queen of the United Kingdom of Great Britain and Ireland, Defender of the Faith, in exercise of the prerogatives that pertain to Us and through the Office of Special Investigations,',
+    '<b>DO COMMAND:</b>',
+    '<i>First.</i> That the present delegation of investigators be granted full and immediate access to the parish of Blackmoor, its church, its inn, and any property registered in the name of the Whateley family, including without restriction the family mausoleum.',
+    '<i>Second.</i> That no civil, ecclesiastical or private authority may impede, delay or condition such access. Any obstruction shall be deemed contempt of the Crown.',
+    '<i>Third.</i> That the bearers of this Decree are empowered to employ such prudent force as may be necessary in defence of their persons and the integrity of their mission, and even to force entry to the mausoleum should it be denied them.',
+    '<i>Fourth.</i> That they shall render direct and confidential account of their work to the Office that signs below.',
+    'Given at Westminster, in the days running of the year of Our Lord eighteen hundred and eighty-nine.'
+   ],
+   keyLabel:'Official formula of the Crown',
+   keyPhrase:'What the Crown writes, none shall read twice.',
+   signature:'Victoria R.', sigRole:'Queen and Defender of the Faith'
+  },
+  informe:{
+   header:'Preliminary Report — Blackmoor Case',
+   sub:'Investigator C. Ashton',
+   subheader:'Drawn up by Dr. Cornelius Ashton, agent of the Office of Special Investigations. Submitted in August 1889. Considered partially illegible.',
+   sections:[
+    {h:'Arrival in the village',b:'I came to Blackmoor in the late afternoon light, with the impression of having crossed an invisible curtain. The horses halted of their own accord before the bridge and could not easily be made to walk on. The coachman would go no further. I paid double; he refused. I entered on foot.'},
+    {h:'First observations',b:'The village is not empty. There are people. They eat, they work, they greet. But they greet a moment too late, as if obliged to remember that one greets at all. The miller’s wife stood for two hours staring at the sky. When I asked what she saw, she smiled and said: “it has not arrived yet”.'},
+    {h:'The missing',b:'I have documented seven cases in four weeks. All return after three or four days, exhausted, with earth beneath their nails and no memory of the interval. The local doctor examines them and sends them home with no further enquiry. When I pressed him for tests, he replied: “there is no need to touch what does not wish to be touched”.'},
+    {h:'The church',b:'The church is bound shut with chains. The vicar abandoned the village two months ago. He left a note nailed to the door: “God has ceased to listen in this place”. The nail that held it was drawn out with difficulty; the wood bore marks of a depth incompatible with its thickness.'},
+    {h:'The processions',b:'Three times, always between one and three in the morning, I have seen a column of villagers cross the village toward the wood, in the direction of the Whateley lands. They carried candles. None spoke. I followed as far as the treeline and there I stopped, for something within me told me that one step further and I would not return the same man.'},
+    {h:'Thomas',b:'The Whateleys’ servant, Thomas, shut the door of the house in my face on the third day. He had been cordial before. That last time his eyes did not blink as he spoke to me. His voice was his. The rest was not. Three times I sought to reach the mausoleum. Three times he prevented it.'},
+    {h:'Edward Hartwell',b:'At the inn I met Edward Hartwell, an Oxford professor and friend of Lord Whateley for twenty-three years. He is the only soul in Blackmoor who still speaks plainly. He confided that, a week before his death, Whateley handed him a small locked chest, begging him to open it should anything befall him. That chest I annex to this dossier. Hartwell did not know the combination, but he pressed upon me an old jest between them: both signed their letters with a figure at the foot, and the last, dated the day before Whateley’s death, bore the number <span class="hl-num">314</span>. “If ever that chest must be opened,” he told me, “that will be the figure.”'},
+    {h:'Final confession',emph:true,b:'I have not slept more than three hours together for eleven days. I hear things in my own room. I struggle to recall my wife’s name. This morning I caught myself writing in this report words I do not recall having thought, in a hand that is not mine. I have decided to leave. I beg whoever reads this not to delay intervention. No man should enter Blackmoor alone.'}
+   ],
+   closing:'What is in Blackmoor is not seen. It is felt. And by the time you feel it, you are already inside.',
+   signature:'C. Ashton'
+  },
+  archivo:{
+   lockedTitle:'Sealed Chest',
+   lockedBody:'This compartment is shut by a five-symbol device. Only one who has activated the cube inside the Room will know the correct order. Tap the symbols in the proper sequence.',
+   error:'Wrong combination. The chest remains shut.',
+   success:'The chest yields. Enter with prudence.',
+   reset:'Reset',
+   revealTitle:'Recovered Letters',
+   letterHeader:'Personal letter from Lord Aldous Whateley',
+   letterSub:'Found in the false bottom of the study desk. Trembling hand, several corrections, traces of wax.',
+   letterBody:[
+    'Edward, old friend,',
+    'If you read this, I am already dead. It does not pain me. I have had time to make peace with the idea, though not with its cause.',
+    'Azrael was right. I laughed at him, who alone watched in earnest, and dismissed him, thinking him superstitious. Today I know he was the last guardian I had in this house, and I, out of pride, shut the door on him.',
+    'I write to you of Thomas. You must know: what sits at my table is no longer Thomas. Some gestures of his remain, yes, but behind the eyes there is something else, whispering to him, promising him freedom in exchange for small obediences. And Thomas, my poor Thomas, fulfils them.',
+    'I know how this will end. Not by revelation nor by dream: by reason. What has taken him needs me silent, and Thomas will need but a moment of steady hands. I shall not fear him. I have known him since he was a boy. He deserves that I look him in the face when it happens, even if it is not he who looks back.',
+    'Forgive me, you who loved me without conditions. And keep this chest. Give it to whoever comes to investigate my death. What lies within is no longer mine: it is a warning.',
+    'Thank you for everything. And for what is yet to come.'
+   ],
+   letterSign:'Aldous',
+   sheetHeader:'Attached sheet',
+   sheetSub:'Folded inside the letter. A trembling pencil drawing, broken annotations, a sketch in the margin. Whateley asked that one not look at it long.',
+   sheetCap:'Unsigned drawing and partial sketch. The X appears on no known map.',
+   seed:'The dossier ends here. What Whateley drew in his final days was not a memory. It was a place. And a place can be visited.'
+  }
+ }
+};
 
-      <button type="button" id="sound-toggle" class="sound-toggle" aria-label="Sonido">
-        <span class="sound-on" aria-hidden="true">♪</span>
-      </button>
-    </div>
-  </section>
+/* ---------------- STATE ---------------- */
+var lang = 'es';
+try{ var sl=localStorage.getItem('wh_lang'); if(sl==='es'||sl==='en')lang=sl; }catch(e){}
+var unlocked=false;
+try{ unlocked = localStorage.getItem('wh_unlocked')==='1'; }catch(e){}
 
-  <!-- ========================================== -->
-  <!-- ROUTE: HUB                                  -->
-  <!-- ========================================== -->
-  <section class="route route-hub" data-route="hub">
-    <div class="page-bg"></div>
+var ORDER=['hexagono','circulo','pentagono','triangulo','cuadrado']; // combinación correcta
+var SYMS=['circulo','triangulo','cuadrado','pentagono','hexagono'];   // orden mostrado
+var input=[];
 
-    <header class="page-header">
-      <div class="page-header-meta">
-        <span class="meta-classified" data-i18n="common.classified">CLASIFICADO</span>
-        <span class="meta-divider">·</span>
-        <span data-i18n="entry.headerMeta">Caso Blackmoor · 1889</span>
-      </div>
-      <h1 class="page-title" data-i18n="hub.title">Mesa del Expediente</h1>
-      <p class="page-subtitle" data-i18n="hub.subtitle">…</p>
-    </header>
+/* ---------------- RENDER ---------------- */
+function el(id){return document.getElementById(id);}
 
-    <nav class="hub-grid" id="hub-grid"><!-- Renderizado por JS --></nav>
+function renderEntry(){
+ var t=C[lang];
+ el('eKicker').textContent=t.kicker;
+ el('eLine').textContent=t.entryLine;
+ el('tagDecreto').textContent=t.labels.decreto;
+ el('tagInforme').textContent=t.labels.informe;
+ el('tagArchivo').textContent=t.labels.archivo;
+ el('langEs').classList.toggle('on',lang==='es');
+ el('langEn').classList.toggle('on',lang==='en');
+ el('archLock').innerHTML=unlocked?IC.check:IC.lock;
+ el('hotArchivo').classList.toggle('done',unlocked);
+ [].forEach.call(document.querySelectorAll('[data-back-label]'),function(n){n.textContent=t.back;});
+ document.documentElement.lang=lang;
+}
 
-    <footer class="page-footer">
-      <p class="page-footer-note" data-i18n="hub.footerNote">…</p>
-      <div class="hub-lang">
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
-        <span class="lang-divider">·</span>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
-      </div>
-    </footer>
-  </section>
+function renderDecreto(){
+ var d=C[lang].decreto, h='';
+ h+='<div class="crest">'+IC.crown+'</div>';
+ h+='<div class="kicker">'+d.kicker+'</div>';
+ h+='<div class="dtitle serif">'+d.title+'</div>';
+ h+='<div class="dsub">'+d.sub+'</div><div class="rule"></div>';
+ d.body.forEach(function(p,i){ h+='<p'+(i>1?' class="indent"':'')+'>'+p+'</p>'; });
+ h+='<div class="keybox"><div class="lbl">'+d.keyLabel+'</div><div class="phrase">'+d.keyPhrase+'</div></div>';
+ h+='<div class="wax">'+IC.crown+'</div>';
+ h+='<div class="sign"><div class="nm">'+d.signature+'</div><div class="rl">'+d.sigRole+'</div></div>';
+ el('decretoSheet').innerHTML=h;
+}
 
-  <!-- ========================================== -->
-  <!-- ROUTE: DECRETO                              -->
-  <!-- ========================================== -->
-  <section class="route route-decreto" data-route="decreto">
-    <div class="page-bg"></div>
+function renderInforme(){
+ var r=C[lang].informe, h='';
+ h+='<div class="dtitle serif" style="font-size:23px">'+r.header+'</div>';
+ h+='<div class="dsub">'+r.sub+'</div>';
+ h+='<div class="kicker" style="font-size:12.5px;margin-top:8px">'+r.subheader+'</div>';
+ h+='<div class="rule"></div>';
+ r.sections.forEach(function(s){
+  h+='<div class="seg'+(s.emph?' emph':'')+'"><div class="sh">'+s.h+'</div><p>'+s.b+'</p></div>';
+ });
+ h+='<div class="closing">'+r.closing+'</div>';
+ h+='<div class="sign"><div class="nm">'+r.signature+'</div></div>';
+ el('informeSheet').innerHTML=h;
+}
 
-    <a href="#hub" class="back-link" data-go="hub">
-      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
-      <span data-i18n="common.back">Volver al expediente</span>
-    </a>
+function renderArchivo(){
+ var a=C[lang].archivo;
+ el('aLockedTitle').textContent=a.lockedTitle;
+ el('aLockedBody').textContent=a.lockedBody;
+ el('cofreReset').textContent=a.reset;
+ // symbols
+ var sr=el('symRow'); sr.innerHTML='';
+ SYMS.forEach(function(name){
+  var b=document.createElement('button');
+  b.className='sym'; b.setAttribute('data-sym',name);
+  b.innerHTML=SYM[name];
+  b.addEventListener('click',function(){ pressSym(name,b); });
+  sr.appendChild(b);
+ });
+ var sd=el('seqDots'); sd.innerHTML=''; for(var i=0;i<5;i++)sd.appendChild(document.createElement('i'));
+ el('archMsg').textContent=''; el('archMsg').className='archmsg';
+ // reveal
+ renderReveal();
+ if(unlocked){ showReveal(false); } else { el('archLockedView').style.display='block'; el('archReveal').classList.remove('on'); }
+}
 
-    <article class="paper paper-official">
-      <div class="paper-corner-crest" aria-hidden="true">
-        <div class="crest-crown">♛</div>
-      </div>
+function renderReveal(){
+ var a=C[lang].archivo, h='';
+ h+='<div class="letter">';
+ h+='<div class="lh">'+a.letterHeader+'</div><div class="ls">'+a.letterSub+'</div>';
+ a.letterBody.forEach(function(p){ h+='<p>'+p+'</p>'; });
+ h+='<div class="lsign">'+a.letterSign+'</div></div>';
+ h+='<div class="sheetimg"><img src="hoja.jpg" alt=""><div class="sheetcap">'+a.sheetHeader+' — '+a.sheetCap+'</div></div>';
+ h+='<div class="seed">'+a.seed+'</div>';
+ h+='<div class="foot">The Works of Madness · Expediente Whateley</div>';
+ el('archReveal').innerHTML=h;
+}
 
-      <header class="paper-header">
-        <p class="paper-eyebrow" data-i18n="decreto.header">…</p>
-        <h1 class="paper-title" data-i18n="decreto.title">Decreto Real</h1>
-      </header>
+/* ---------------- COFRE LOGIC ---------------- */
+function pressSym(name,btn){
+ if(unlocked) return;
+ btn.classList.add('lit');
+ input.push(name);
+ var dots=el('seqDots').children;
+ if(input.length<=5) dots[input.length-1].classList.add('fill');
+ if(input.length===5){
+  var ok=ORDER.every(function(s,i){return input[i]===s;});
+  setTimeout(function(){ ok?openCofre():failCofre(); },360);
+ }
+}
+function clearSeq(){
+ input=[];
+ [].forEach.call(el('symRow').children,function(b){b.classList.remove('lit');});
+ [].forEach.call(el('seqDots').children,function(d){d.classList.remove('fill');});
+}
+function failCofre(){
+ var a=C[lang].archivo;
+ var st=el('cofreStage'); st.classList.add('shake');
+ if(navigator.vibrate)navigator.vibrate([60,40,60]);
+ var m=el('archMsg'); m.textContent=a.error; m.className='archmsg err';
+ setTimeout(function(){ st.classList.remove('shake'); clearSeq(); },650);
+}
+function openCofre(){
+ var a=C[lang].archivo;
+ unlocked=true; try{localStorage.setItem('wh_unlocked','1');}catch(e){}
+ el('cofreStage').classList.add('opened');
+ var m=el('archMsg'); m.textContent=a.success; m.className='archmsg ok';
+ if(navigator.vibrate)navigator.vibrate(30);
+ setTimeout(function(){ showReveal(true); renderEntry(); },1400);
+}
+function showReveal(anim){
+ el('archLockedView').style.display='none';
+ el('archReveal').classList.add('on');
+ window.scrollTo(0,0);
+}
+el('cofreReset').addEventListener('click',function(){
+ clearSeq(); el('archMsg').textContent=''; el('archMsg').className='archmsg';
+});
 
-      <div class="paper-body" id="decreto-body"><!-- Renderizado por JS --></div>
+/* ---------------- NAVIGATION ---------------- */
+var VIEWS=['entry','vDecreto','vInforme','vArchivo'];
+function show(id){
+ VIEWS.forEach(function(v){ el(v).classList.toggle('on',v===id); });
+ window.scrollTo(0,0);
+}
+el('hotDecreto').addEventListener('click',function(){ renderDecreto(); show('vDecreto'); });
+el('hotInforme').addEventListener('click',function(){ renderInforme(); show('vInforme'); });
+el('hotArchivo').addEventListener('click',function(){ clearSeq(); renderArchivo(); show('vArchivo'); });
+[].forEach.call(document.querySelectorAll('[data-back]'),function(b){
+ b.addEventListener('click',function(){ renderEntry(); show('entry'); });
+});
 
-      <footer class="paper-footer">
-        <div class="paper-signature paper-signature-royal" data-i18n="decreto.signature">Victoria R.</div>
-        <div class="paper-seal-wax" aria-hidden="true">
-          <div class="seal-wax-inner" data-i18n="decreto.stamp">POR LA CORONA</div>
-        </div>
-        <p class="paper-annotation" data-i18n="decreto.annotation">…</p>
-      </footer>
-    </article>
-  </section>
+/* language */
+function setLang(l){
+ lang=l; try{localStorage.setItem('wh_lang',l);}catch(e){}
+ renderEntry(); renderDecreto(); renderInforme(); renderArchivo();
+}
+el('langEs').addEventListener('click',function(){ setLang('es'); });
+el('langEn').addEventListener('click',function(){ setLang('en'); });
 
-  <!-- ========================================== -->
-  <!-- ROUTE: INFORME                              -->
-  <!-- ========================================== -->
-  <section class="route route-informe" data-route="informe">
-    <div class="page-bg"></div>
-
-    <a href="#hub" class="back-link" data-go="hub">
-      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
-      <span data-i18n="common.back">Volver al expediente</span>
-    </a>
-
-    <article class="paper paper-typed">
-      <div class="folder-tab">
-        <span data-i18n="informe.header">INFORME PRELIMINAR</span>
-      </div>
-
-      <header class="paper-header">
-        <h1 class="paper-title" data-i18n="informe.title">Informe Ashton</h1>
-        <p class="paper-subheader" data-i18n="informe.subheader">…</p>
-      </header>
-
-      <div class="paper-body paper-body-typed" id="informe-body"><!-- Renderizado por JS --></div>
-
-      <footer class="paper-footer">
-        <p class="paper-closing" data-i18n="informe.closing">…</p>
-        <div class="paper-signature paper-signature-hand" data-i18n="informe.signature">C. Ashton</div>
-      </footer>
-    </article>
-  </section>
-
-  <!-- ========================================== -->
-  <!-- ROUTE: HEMEROTECA                           -->
-  <!-- ========================================== -->
-  <section class="route route-hemeroteca" data-route="hemeroteca">
-    <div class="page-bg"></div>
-
-    <a href="#hub" class="back-link" data-go="hub">
-      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
-      <span data-i18n="common.back">Volver al expediente</span>
-    </a>
-
-    <header class="page-header">
-      <h1 class="page-title" data-i18n="hemeroteca.title">Hemeroteca</h1>
-      <p class="page-subtitle" data-i18n="hemeroteca.subtitle">…</p>
-    </header>
-
-    <div class="clippings" id="hemeroteca-list"><!-- Renderizado por JS --></div>
-  </section>
-
-  <!-- ========================================== -->
-  <!-- ROUTE: PARROCO                              -->
-  <!-- ========================================== -->
-  <section class="route route-parroco" data-route="parroco">
-    <div class="page-bg"></div>
-
-    <a href="#hub" class="back-link" data-go="hub">
-      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
-      <span data-i18n="common.back">Volver al expediente</span>
-    </a>
-
-    <header class="page-header">
-      <h1 class="page-title" data-i18n="parroco.title">Nota del Párroco</h1>
-      <p class="page-subtitle" data-i18n="parroco.subtitle">…</p>
-    </header>
-
-    <figure class="parroco-note">
-      <div class="note-nail" aria-hidden="true"></div>
-      <blockquote class="note-quote" data-i18n="parroco.quote">…</blockquote>
-      <figcaption class="note-signature" data-i18n="parroco.signature">…</figcaption>
-    </figure>
-
-    <p class="parroco-footer" data-i18n="parroco.footer">…</p>
-  </section>
-
-  <!-- ========================================== -->
-  <!-- ROUTE: MAPA                                 -->
-  <!-- ========================================== -->
-  <section class="route route-mapa" data-route="mapa">
-    <div class="page-bg"></div>
-
-    <a href="#hub" class="back-link" data-go="hub">
-      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
-      <span data-i18n="common.back">Volver al expediente</span>
-    </a>
-
-    <header class="page-header">
-      <h1 class="page-title" data-i18n="mapa.title">Mapa de Blackmoor</h1>
-      <p class="page-subtitle" data-i18n="mapa.subtitle">…</p>
-      <p class="page-instructions" data-i18n="mapa.instructions">…</p>
-    </header>
-
-    <div class="mapa-stage">
-      <svg class="mapa-svg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-label="Map of Blackmoor">
-        <defs>
-          <pattern id="paper-noise" patternUnits="userSpaceOnUse" width="6" height="6">
-            <rect width="6" height="6" fill="#d8c298" opacity="0.05"/>
-          </pattern>
-        </defs>
-        <rect x="0" y="0" width="400" height="320" fill="url(#paper-noise)"/>
-        <!-- Río -->
-        <path d="M0,210 Q80,200 130,220 T280,210 T400,200" stroke="#3a4f5a" stroke-width="3" fill="none" opacity="0.7"/>
-        <!-- Bosque -->
-        <g opacity="0.7" fill="#2f4634">
-          <circle cx="60" cy="60" r="14"/>
-          <circle cx="90" cy="50" r="11"/>
-          <circle cx="120" cy="65" r="13"/>
-          <circle cx="150" cy="55" r="10"/>
-          <circle cx="80" cy="90" r="12"/>
-          <circle cx="120" cy="95" r="14"/>
-          <circle cx="155" cy="85" r="11"/>
-          <circle cx="40" cy="95" r="10"/>
-        </g>
-        <!-- Casas marcadas -->
-        <g class="map-pin" data-loc="casas">
-          <circle cx="220" cy="170" r="9"/>
-          <text x="220" y="174" text-anchor="middle" class="pin-label">×</text>
-        </g>
-        <!-- Iglesia -->
-        <g class="map-pin" data-loc="iglesia">
-          <circle cx="180" cy="240" r="10"/>
-          <text x="180" y="245" text-anchor="middle" class="pin-label">†</text>
-        </g>
-        <!-- Posada -->
-        <g class="map-pin" data-loc="posada">
-          <circle cx="280" cy="240" r="9"/>
-          <text x="280" y="244" text-anchor="middle" class="pin-label">⌂</text>
-        </g>
-        <!-- Whateley -->
-        <g class="map-pin" data-loc="whateley">
-          <circle cx="330" cy="120" r="11"/>
-          <text x="330" y="125" text-anchor="middle" class="pin-label">W</text>
-        </g>
-        <!-- Bosque pin -->
-        <g class="map-pin" data-loc="bosque">
-          <circle cx="100" cy="75" r="10"/>
-          <text x="100" y="79" text-anchor="middle" class="pin-label">✦</text>
-        </g>
-        <!-- Compass -->
-        <g transform="translate(360,40)" opacity="0.7">
-          <circle r="14" fill="none" stroke="#a07a3a" stroke-width="0.8"/>
-          <text y="-16" text-anchor="middle" font-size="9" fill="#a07a3a">N</text>
-          <line x1="0" y1="-10" x2="0" y2="10" stroke="#a07a3a" stroke-width="0.8"/>
-          <line x1="-10" y1="0" x2="10" y2="0" stroke="#a07a3a" stroke-width="0.8"/>
-        </g>
-      </svg>
-    </div>
-
-    <div class="mapa-locations" id="mapa-locations"><!-- Renderizado por JS --></div>
-  </section>
-
-  <!-- ========================================== -->
-  <!-- ROUTE: CARTA                                -->
-  <!-- ========================================== -->
-  <section class="route route-carta" data-route="carta">
-    <div class="page-bg"></div>
-
-    <a href="#hub" class="back-link" data-go="hub">
-      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
-      <span data-i18n="common.back">Volver al expediente</span>
-    </a>
-
-    <article class="paper paper-letter">
-      <header class="paper-header">
-        <p class="paper-eyebrow" data-i18n="carta.header">…</p>
-        <h1 class="paper-title" data-i18n="carta.title">Correspondencia privada</h1>
-        <p class="paper-subheader" data-i18n="carta.subheader">…</p>
-      </header>
-
-      <div class="paper-body paper-body-handwritten" id="carta-body"><!-- Renderizado por JS --></div>
-
-      <footer class="paper-footer">
-        <div class="paper-signature paper-signature-hand" data-i18n="carta.signature">Edward Hartwell</div>
-        <p class="paper-ps" data-i18n="carta.ps">…</p>
-      </footer>
-    </article>
-  </section>
-
-  <!-- ========================================== -->
-  <!-- ROUTE: ARCHIVO                              -->
-  <!-- ========================================== -->
-  <section class="route route-archivo" data-route="archivo">
-    <div class="page-bg"></div>
-
-    <a href="#hub" class="back-link" data-go="hub">
-      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
-      <span data-i18n="common.back">Volver al expediente</span>
-    </a>
-
-    <header class="page-header">
-      <h1 class="page-title" data-i18n="archivo.title">Archivo Restringido</h1>
-      <p class="page-subtitle" data-i18n="archivo.subtitle">…</p>
-    </header>
-
-    <!-- Cofre cerrado -->
-    <div class="archivo-locked" id="archivo-locked">
-      <h2 class="cofre-heading" data-i18n="archivo.lockedHeading">Cofre Sellado</h2>
-      <p class="cofre-body" data-i18n="archivo.lockedBody">…</p>
-
-      <div class="cofre">
-        <div class="cofre-lid"></div>
-        <div class="cofre-front">
-          <div class="cofre-symbols" id="cofre-symbols">
-            <button type="button" class="cofre-symbol" data-symbol="hexagono" aria-label="Hexágono">
-              <svg viewBox="0 0 60 60"><polygon points="30,5 53,18 53,42 30,55 7,42 7,18" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
-            </button>
-            <button type="button" class="cofre-symbol" data-symbol="circulo" aria-label="Círculo">
-              <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
-            </button>
-            <button type="button" class="cofre-symbol" data-symbol="pentagono" aria-label="Pentágono">
-              <svg viewBox="0 0 60 60"><polygon points="30,5 55,23 45,52 15,52 5,23" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
-            </button>
-            <button type="button" class="cofre-symbol" data-symbol="triangulo" aria-label="Triángulo">
-              <svg viewBox="0 0 60 60"><polygon points="30,8 54,52 6,52" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
-            </button>
-            <button type="button" class="cofre-symbol" data-symbol="cuadrado" aria-label="Cuadrado">
-              <svg viewBox="0 0 60 60"><rect x="9" y="9" width="42" height="42" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <ol class="cofre-progress" id="cofre-progress">
-        <li class="cofre-slot"></li>
-        <li class="cofre-slot"></li>
-        <li class="cofre-slot"></li>
-        <li class="cofre-slot"></li>
-        <li class="cofre-slot"></li>
-      </ol>
-
-      <p class="cofre-msg" id="cofre-msg" role="status" aria-live="polite"></p>
-
-      <button type="button" class="cofre-reset is-hidden" id="cofre-reset" data-i18n="archivo.reset">Reintentar</button>
-    </div>
-
-    <!-- Cofre abierto -->
-    <div class="archivo-unlocked is-hidden" id="archivo-unlocked">
-      <h2 class="archivo-unlocked-title" data-i18n="archivo.unlocked.title">Cartas Recobradas</h2>
-
-      <article class="paper paper-letter paper-letter-trembling">
-        <header class="paper-header">
-          <p class="paper-eyebrow" data-i18n="archivo.unlocked.letter.header">…</p>
-          <p class="paper-subheader" data-i18n="archivo.unlocked.letter.subheader">…</p>
-        </header>
-        <div class="paper-body paper-body-handwritten" id="whateley-body"><!-- Renderizado por JS --></div>
-        <footer class="paper-footer">
-          <div class="paper-signature paper-signature-hand" data-i18n="archivo.unlocked.letter.signature">Aldous</div>
-        </footer>
-      </article>
-
-      <article class="paper paper-attached">
-        <header class="paper-header">
-          <p class="paper-eyebrow" data-i18n="archivo.unlocked.attached.header">Hoja Adjunta</p>
-          <p class="paper-subheader" data-i18n="archivo.unlocked.attached.subheader">…</p>
-        </header>
-
-        <div class="attached-grid">
-          <figure class="attached-fig attached-drawing">
-            <div class="attached-placeholder attached-placeholder-drawing" aria-hidden="true">
-              <svg viewBox="0 0 200 200">
-                <g stroke="#3a2a18" stroke-width="1.2" fill="none" opacity="0.85" transform="translate(100,110)">
-                  <path d="M-30,-40 Q-15,-65 0,-60 Q15,-65 30,-40 Q45,-25 40,5 Q50,30 35,55 Q15,75 0,70 Q-15,75 -35,55 Q-50,30 -40,5 Q-45,-25 -30,-40 Z"/>
-                  <circle cx="-12" cy="-25" r="3" fill="#3a2a18"/>
-                  <circle cx="12" cy="-25" r="3" fill="#3a2a18"/>
-                  <path d="M-25,40 Q-15,55 -5,40"/>
-                  <path d="M5,40 Q15,55 25,40"/>
-                  <path d="M-15,15 Q0,25 15,15"/>
-                  <path d="M-45,-10 Q-65,5 -55,30"/>
-                  <path d="M45,-10 Q65,5 55,30"/>
-                  <path d="M-50,40 Q-65,55 -50,70"/>
-                  <path d="M50,40 Q65,55 50,70"/>
-                </g>
-              </svg>
-            </div>
-            <figcaption class="attached-caption" data-i18n="archivo.unlocked.attached.captionDrawing">…</figcaption>
-          </figure>
-
-          <figure class="attached-fig attached-map">
-            <div class="attached-placeholder attached-placeholder-map" aria-hidden="true">
-              <svg viewBox="0 0 200 200">
-                <rect x="0" y="0" width="200" height="200" fill="#d8c298" opacity="0.1"/>
-                <path d="M20,160 Q70,140 120,150 T180,130" stroke="#5a3a18" stroke-width="1.4" fill="none" opacity="0.7"/>
-                <path d="M30,40 Q60,30 90,55 T160,60" stroke="#5a3a18" stroke-width="1" fill="none" opacity="0.5" stroke-dasharray="3,3"/>
-                <g fill="#2f4634" opacity="0.6">
-                  <circle cx="50" cy="80" r="6"/>
-                  <circle cx="65" cy="75" r="5"/>
-                  <circle cx="80" cy="85" r="6"/>
-                </g>
-                <g transform="translate(140,100)">
-                  <line x1="-8" y1="-8" x2="8" y2="8" stroke="#a8311a" stroke-width="2.4"/>
-                  <line x1="8" y1="-8" x2="-8" y2="8" stroke="#a8311a" stroke-width="2.4"/>
-                </g>
-                <text x="155" y="105" font-size="8" fill="#a8311a" font-style="italic">?</text>
-              </svg>
-            </div>
-            <figcaption class="attached-caption" data-i18n="archivo.unlocked.attached.captionMap">…</figcaption>
-          </figure>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- Audio ambiente -->
-  <audio id="ambient-audio" loop preload="none"></audio>
-
-  <script src="i18n.js" defer></script>
-  <script src="main.js" defer></script>
+/* ---------------- INIT ---------------- */
+renderEntry(); renderDecreto(); renderInforme(); renderArchivo();
+})();
+</script>
 </body>
 </html>
