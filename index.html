@@ -40,10 +40,11 @@ body{font-family:'Crimson Text',Georgia,serif;color:var(--ink);-webkit-font-smoo
  background:linear-gradient(180deg,rgba(8,6,4,.9),rgba(8,6,4,.55) 60%,transparent);text-align:center}
 .entry-kicker{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);font-weight:600}
 .entry-line{font-size:12.5px;color:#bdae8c;margin-top:7px;line-height:1.5;font-style:italic;padding:0 6px}
-.lang{display:flex;gap:0;justify-content:center;margin-top:11px}
-.lang button{font-family:'Cormorant Garamond',serif;font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:#8a7c5c;background:none;border:none;padding:3px 11px;cursor:pointer}
-.lang button.on{color:var(--gold-soft)}
-.lang .sep{color:#5a4f3a;align-self:center}
+.lang{position:absolute;top:11px;right:13px;display:flex;border-radius:22px;overflow:hidden;
+ border:1px solid rgba(199,154,62,.65);background:rgba(10,8,5,.92);box-shadow:0 3px 13px rgba(0,0,0,.8)}
+.lang button{font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:700;letter-spacing:1.2px;
+ color:#9a8c66;background:none;border:none;padding:6px 14px;cursor:pointer;transition:background .2s,color .2s}
+.lang button.on{background:var(--gold);color:#171008}
 
 /* hotspots over the table objects */
 .hot{position:absolute;cursor:pointer;z-index:7;border:none;background:transparent;padding:0}
@@ -51,14 +52,15 @@ body{font-family:'Crimson Text',Georgia,serif;color:var(--ink);-webkit-font-smoo
  background:radial-gradient(ellipse,rgba(231,180,90,.34),rgba(231,180,90,.07) 55%,transparent 72%);
  animation:breathe 3.4s ease-in-out infinite}
 @keyframes breathe{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1.06)}}
-.hot .tag{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;
- font-family:'Cormorant Garamond',serif;font-weight:700;font-size:13px;letter-spacing:1.6px;
- color:#f0e3bf;text-shadow:0 2px 8px #000,0 0 12px rgba(0,0,0,.9);text-transform:uppercase}
-.hot .tag.below{top:100%;margin-top:2px}
-.hot .tag.above{bottom:100%;margin-bottom:2px}
+.hot .tag{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;
+ display:flex;align-items:center;gap:6px;
+ font-family:'Cormorant Garamond',serif;font-weight:700;font-size:12.5px;letter-spacing:1.7px;
+ text-transform:uppercase;color:#f4e7c2;
+ background:rgba(11,8,5,.82);border:1px solid rgba(199,154,62,.75);border-radius:24px;
+ padding:7px 15px;box-shadow:0 5px 18px rgba(0,0,0,.9)}
+.hot .tag svg{width:13px;height:13px;flex-shrink:0}
 .hot:active{transform:scale(.97)}
 .hot.decreto{left:22%;top:24%;width:56%;height:17%}
-.hot.decreto .tag{top:-6px}
 .hot.informe{left:24%;top:40%;width:54%;height:26%}
 .hot.archivo{left:25%;top:72%;width:52%;height:23%}
 .hot .lock{position:absolute;right:8%;top:6%;width:24px;height:24px;border-radius:50%;
@@ -203,14 +205,14 @@ body{font-family:'Crimson Text',Georgia,serif;color:var(--ink);-webkit-font-smoo
   <div class="entry-kicker" id="eKicker">Clasificado · Caso Blackmoor 1889</div>
   <div class="entry-line" id="eLine">—</div>
   <div class="lang">
-   <button id="langEs" class="on">ES</button><span class="sep">·</span><button id="langEn">EN</button>
+   <button id="langEs" class="on">ES</button><button id="langEn">EN</button>
   </div>
  </div>
  <div class="mesa-wrap">
   <img class="mesa" src="mesa.jpg" alt="">
   <button class="hot decreto" id="hotDecreto"><span class="halo"></span><span class="tag" id="tagDecreto">Decreto Real</span></button>
-  <button class="hot informe" id="hotInforme"><span class="halo"></span><span class="tag below" id="tagInforme">Informe de Ashton</span></button>
-  <button class="hot archivo" id="hotArchivo"><span class="halo"></span><span class="tag above" id="tagArchivo">Archivo Restringido</span><span class="lock" id="archLock"></span></button>
+  <button class="hot informe" id="hotInforme"><span class="halo"></span><span class="tag" id="tagInforme">Informe de Ashton</span></button>
+  <button class="hot archivo" id="hotArchivo"><span class="halo"></span><span class="tag" id="tagArchivo">Archivo Restringido</span></button>
   <div class="vig"></div>
  </div>
  <div class="dust"></div>
@@ -424,11 +426,9 @@ function renderEntry(){
  el('eLine').textContent=t.entryLine;
  el('tagDecreto').textContent=t.labels.decreto;
  el('tagInforme').textContent=t.labels.informe;
- el('tagArchivo').textContent=t.labels.archivo;
+ el('tagArchivo').innerHTML=(unlocked?IC.check:IC.lock)+'<span>'+t.labels.archivo+'</span>';
  el('langEs').classList.toggle('on',lang==='es');
  el('langEn').classList.toggle('on',lang==='en');
- el('archLock').innerHTML=unlocked?IC.check:IC.lock;
- el('hotArchivo').classList.toggle('done',unlocked);
  [].forEach.call(document.querySelectorAll('[data-back-label]'),function(n){n.textContent=t.back;});
  document.documentElement.lang=lang;
 }
