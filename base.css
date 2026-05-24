@@ -1,0 +1,92 @@
+/* =============================
+   BASE — Reset, paleta, tipografía
+   ============================= */
+
+:root {
+  /* Paleta victoriana */
+  --color-bg-deep: #0d0905;
+  --color-bg: #1a1108;
+  --color-bg-paper: #2a1d10;
+  --color-paper-warm: #d8c298;
+  --color-paper-light: #e9d9b9;
+  --color-ink: #2a1810;
+  --color-ink-soft: #4d3422;
+  --color-gold: #c9a85a;
+  --color-gold-soft: #8a6a2a;
+  --color-lacre: #a8311a;
+  --color-lacre-deep: #6e1f0f;
+  --color-bottle: #2f4634;
+
+  /* Tipografía */
+  --font-title: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-body: 'Crimson Text', 'Georgia', serif;
+  --font-hand: 'Caveat', 'Brush Script MT', cursive;
+
+  /* Tamaños base — mobile first */
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 22px;
+  --fs-2xl: 28px;
+  --fs-3xl: 36px;
+  --fs-4xl: 48px;
+
+  /* Espaciado */
+  --sp-xs: 6px;
+  --sp-sm: 12px;
+  --sp-md: 18px;
+  --sp-lg: 28px;
+  --sp-xl: 44px;
+
+  /* Radios y sombras */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  color: var(--color-paper-warm);
+  background-color: var(--color-bg-deep);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* Solo bloqueamos scroll en la pantalla de entrada */
+body.is-entry {
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

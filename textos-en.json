@@ -1,0 +1,197 @@
+{
+  "common": {
+    "siteTitle": "Whateley Dossier",
+    "classified": "CLASSIFIED",
+    "back": "Back to dossier",
+    "home": "Home"
+  },
+  "entry": {
+    "headerSmall": "Official Dossier",
+    "headerMeta": "Blackmoor Case · 1889",
+    "subtitle": "Document compiled by order of Her Majesty. Restricted to the bearer.",
+    "cta": "OPEN FILE"
+  },
+  "hub": {
+    "title": "The Dossier Table",
+    "subtitle": "Documents compiled by the Crown's Office of Special Investigations. Touch any item to examine it.",
+    "footerNote": "No document is to leave this dossier without express authorisation of Her Majesty.",
+    "items": {
+      "decreto": { "label": "Royal Decree", "hint": "Authorisation of Her Majesty" },
+      "informe": { "label": "Ashton's Report", "hint": "Preliminary investigation" },
+      "hemeroteca": { "label": "Press Archive", "hint": "Newspaper clippings, 1889" },
+      "parroco": { "label": "Vicar's Note", "hint": "Found nailed to the door" },
+      "mapa": { "label": "Map of Blackmoor", "hint": "Topography and locations" },
+      "carta": { "label": "Private Correspondence", "hint": "Letter from Edward Hartwell" },
+      "archivo": { "label": "Restricted Archive", "hint": "Access only to the bearer of the cypher" }
+    }
+  },
+  "decreto": {
+    "title": "Royal Decree",
+    "header": "By the Grace of God and the Will of the Realm",
+    "stamp": "BY THE CROWN",
+    "body": [
+      "We, Victoria, by the Grace of God, Queen of the United Kingdom of Great Britain and Ireland, Defender of the Faith, in exercise of the prerogatives that pertain to Us and through the Office of Special Investigations,",
+      "DO COMMAND:",
+      "First. That the present delegation of investigators be granted full and immediate access to the parish of Blackmoor, its dependencies, church, inn, and any property registered in the name of the Whateley family, including without restriction the family mausoleum.",
+      "Second. That no civil, ecclesiastical or private authority may impede, delay or condition such access. Any obstruction shall be deemed contempt of the Crown and judged accordingly.",
+      "Third. That the bearers of this Decree are empowered to employ such prudent force as may be necessary in defence of their persons and the integrity of their mission.",
+      "Fourth. That they shall render direct and confidential account of their work to the Office that signs below.",
+      "Given at Westminster, in the days running of the year of Our Lord eighteen hundred and eighty-nine."
+    ],
+    "signature": "Victoria R.",
+    "annotation": "May God keep those who dare to look at what others have chosen to forget."
+  },
+  "informe": {
+    "title": "Ashton's Report",
+    "header": "PRELIMINARY REPORT — BLACKMOOR CASE",
+    "subheader": "Drawn up by Dr. Cornelius Ashton, agent of the Office of Special Investigations. Submitted in August 1889. Considered partially illegible.",
+    "sections": [
+      {
+        "heading": "Arrival in the village",
+        "body": "I came to Blackmoor in the late afternoon light, with the impression of having crossed an invisible curtain. The horses halted of their own accord before the bridge and could not easily be made to walk on. The coachman would go no further. I paid double; he refused. I entered on foot."
+      },
+      {
+        "heading": "First observations",
+        "body": "The village is not empty. There are people. They eat, they work, they greet. But they greet a moment too late, as if obliged to remember that one greets at all. The miller's wife stood for two hours staring at the sky without moving. When I asked what she saw, she smiled and said: \"it has not arrived yet.\""
+      },
+      {
+        "heading": "The missing",
+        "body": "I have documented seven cases in four weeks. All return after three or four days, exhausted, with earth beneath their nails and no memory of the interval. The local doctor, one Pritchard, examines them and sends them home with no further enquiry. When I pressed him for tests, he replied: \"there is no need to touch what does not wish to be touched.\""
+      },
+      {
+        "heading": "The church",
+        "body": "The church is bound shut with chains. The vicar, the Reverend Hollis, abandoned the village two months ago. He left a note on the door. I have recovered it and attached it to this dossier. I do not wish to transcribe it here."
+      },
+      {
+        "heading": "The processions",
+        "body": "Three times, always between one and three in the morning, I have seen a column of villagers walk through the streets toward the wood. They carried candles. None spoke. I followed them as far as the edge of the trees, and there I stopped, because something within me — and I am not exaggerating — told me that one further step would mean returning a different man."
+      },
+      {
+        "heading": "Thomas",
+        "body": "The Whateleys' servant, Thomas, shut the door of the house in my face on the third day. He had been cordial before. That last time his eyes did not blink as he spoke to me. His voice was his. The rest was not."
+      },
+      {
+        "heading": "Final confession",
+        "body": "I have not slept more than three hours together for eleven days. I hear things in my own room. I struggle to recall my wife's name. This morning I caught myself writing in this report words I do not recall having thought, in a hand that is not mine. I have decided to leave. I beg whoever reads this not to delay intervention. No man should enter Blackmoor alone.",
+        "emphasis": true
+      }
+    ],
+    "closing": "What is in Blackmoor is not seen. It is felt. And by the time you feel it, you are already inside.",
+    "signature": "C. Ashton"
+  },
+  "hemeroteca": {
+    "title": "Press Archive",
+    "subtitle": "Clippings collected from the national and local press between March and August 1889.",
+    "clippings": [
+      {
+        "source": "The Times — London, 14 May 1889",
+        "headline": "Strange Events in a Cotswold Parish",
+        "body": "Inhabitants of the small parish of Blackmoor have reported inexplicable episodes over the last months. An anonymous correspondent describes \"nocturnal candlelit processions\" and a \"silence ill-suited even to an English hamlet\"."
+      },
+      {
+        "source": "Gloucester Echo — 02 June 1889",
+        "headline": "Vicar Abandons Blackmoor without Explanation",
+        "body": "The Reverend Albert Hollis, vicar for seventeen years, has left his church. Those close to him say he affixed a note to the church door before departing. Ecclesiastical authorities have declined to comment."
+      },
+      {
+        "source": "The Daily Chronicle — 19 July 1889",
+        "headline": "Villagers Vanish and Return without Memory",
+        "body": "At least seven persons have disappeared for several days, only to return in a state of confusion. None recalls where they have been. A local doctor has urged \"that the matter be allowed to rest\"."
+      },
+      {
+        "source": "Catholic Herald — 11 August 1889",
+        "headline": "The Church Speaks of Heresy where it Once Spoke of Faith",
+        "body": "A diocesan bulletin refers, without naming places, to \"practices that cannot be tolerated on Christian soil\". Sources close to the bishopric point to Blackmoor as the source of the unease."
+      }
+    ]
+  },
+  "parroco": {
+    "title": "The Vicar's Note",
+    "subtitle": "Found nailed to the door of the Blackmoor parish on 28 June 1889. Recovered by Dr. Ashton.",
+    "quote": "God has ceased to listen in this place.",
+    "signature": "—Reverend A. Hollis",
+    "footer": "The nail that held the note to the door was extracted with difficulty. The wood bore marks of a depth incompatible with its thickness."
+  },
+  "mapa": {
+    "title": "Map of Blackmoor",
+    "subtitle": "Hand-drawn survey. Locations marked according to the testimonies gathered by Dr. Ashton.",
+    "instructions": "Touch each location to expand the dossier's observations.",
+    "locations": [
+      {
+        "id": "iglesia",
+        "label": "Church of St. Bridget",
+        "note": "Bound shut with chains since June. The Reverend Hollis's note was removed from the main door. Villagers report Latin chanting, ill-pronounced, before dawn — though the building stands empty."
+      },
+      {
+        "id": "posada",
+        "label": "The Black Stag Inn",
+        "note": "The only establishment open to outsiders. The innkeeper, one Crowe, will not take guests after nightfall. The first-floor rooms remain permanently shut \"for repairs\" no one has seen begin."
+      },
+      {
+        "id": "whateley",
+        "label": "Whateley Estate",
+        "note": "A three-storey manor with library and neglected gardens. Family mausoleum at the rear, separated by a yew hedge. The Royal Decree authorises full access, including the mausoleum. Service reduced to a single servant: Thomas."
+      },
+      {
+        "id": "bosque",
+        "label": "Blackmoor Wood",
+        "note": "Northern boundary. The nightly processions go this way. Dr. Ashton stopped at this point. Following any such group beyond the first clearing is strongly inadvisable."
+      },
+      {
+        "id": "casas",
+        "label": "Marked Houses",
+        "note": "Homes of the seven documented missing. All bear in common an inverted cross carved into the lintel, apparently with a fingernail."
+      }
+    ]
+  },
+  "carta": {
+    "title": "Private Correspondence",
+    "header": "From Edward Hartwell to a friend of absolute trust",
+    "subheader": "Personal letter. Not part of the Decree. Included for its bearing on the case.",
+    "body": [
+      "My dear friend,",
+      "If this letter reaches your hands, it means that my last efforts to have the matter attended to have failed, and that someone, at last, has decided to take seriously what is happening in Blackmoor.",
+      "Aldous was my friend. Not the lord. The man. And a man does not take his own life unless something no longer human has driven him to it. What dwells in his house — in the mausoleum above all — does not belong to this side.",
+      "I have left, in his library, inside a small locked chest, the only thing I kept of his. It is no great matter: a note, an object. But I am sure you will need it.",
+      "The chest opens with a combination of three figures. If you have read my earlier letters with care, you will know that Aldous and I always wrote with a number at the foot. The last I received, dated the day before his death, bore the number 314.",
+      "Use it if you find yourself in straits. And, I beg of you, tell no one I told you.",
+      "I know this place will test you. I know also that you are not alone. The hand that signs that Decree knows what it is about. And those you have chosen as companions on this journey will rise to it.",
+      "Take care of yourself. And of those who are yours.",
+      "Your friend, to the end,"
+    ],
+    "signature": "Edward Hartwell",
+    "ps": "P. S. — Should you meet Thomas, do not look him in the eye for too long. He has not been Thomas for some weeks."
+  },
+  "archivo": {
+    "title": "Restricted Archive",
+    "subtitle": "Access only to the bearer of the cypher obtained in the Room.",
+    "lockedHeading": "Sealed Chest",
+    "lockedBody": "This compartment is shut by a five-symbol device. Only one who has activated the cube in the room will know the correct order. Touch the symbols in the proper sequence.",
+    "errorMsg": "Wrong combination. The chest remains shut.",
+    "successMsg": "The chest is open. Enter with prudence.",
+    "reset": "Try again",
+    "unlocked": {
+      "title": "Recovered Letters",
+      "letter": {
+        "header": "Personal letter from Lord Aldous Whateley",
+        "subheader": "Found in the false bottom of the study desk. Trembling hand, several corrections, traces of wax.",
+        "body": [
+          "Edward, old friend,",
+          "If you read this, I am already dead. It does not pain me. I have had time to make peace with the idea, though not with its cause.",
+          "Azrael was right. I did not laugh in time at serious things, and I laughed too much at him, who alone watched in earnest. I dismissed him, thinking him superstitious. Today I know he was the last guardian I had in this house, and I, out of pride, shut the door on him.",
+          "I write to you of Thomas. You must know. What sits at my table is not Thomas. Some gestures of his remain — the way he takes up the jug, the way he clears his throat before speaking. But behind the eyes there is something else, whispering to him. It promises him freedom in exchange for small obediences. And Thomas, my poor Thomas, fulfils them.",
+          "I know how this will end. Not by revelation, nor by dream: by reason. What has taken him needs me silent. And Thomas will need but a moment of steady hands to do it. I shall not fear him. I have known him since he was a boy. He deserves that I look him in the face when it happens, even if it is not he who looks back.",
+          "Forgive me, you who loved me without conditions. For the times I did not believe you. For the times I doubted you. For laughing at Azrael. For laughing at myself when I should not have.",
+          "Thank you for everything. And for what is yet to come."
+        ],
+        "signature": "Aldous"
+      },
+      "attached": {
+        "header": "Attached Sheet",
+        "subheader": "Folded inside the letter. Trembling pencil drawing. Broken annotations. Whateley expressly asks that one not look at it long.",
+        "captionDrawing": "Unsigned drawing. Do not look longer than necessary.",
+        "captionMap": "Partial sketch. The X appears on no official map."
+      }
+    }
+  }
+}

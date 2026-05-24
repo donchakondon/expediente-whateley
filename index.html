@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a1108">
+  <meta name="description" content="Expediente clasificado de la Corona Británica — Caso Blackmoor, 1889.">
+  <title>Expediente Whateley</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: ENTRY                                -->
+  <!-- ========================================== -->
+  <section class="route route-entry is-active" data-route="entry">
+    <div class="entry-vignette"></div>
+    <div class="entry-dust"></div>
+
+    <div class="entry-candle">
+      <div class="candle-flame"></div>
+      <div class="candle-glow"></div>
+    </div>
+
+    <div class="entry-content">
+      <div class="entry-seal">
+        <span class="seal-text" data-i18n="entry.classified">CLASIFICADO</span>
+      </div>
+
+      <h1 class="entry-title">
+        <span class="title-line title-small" data-i18n="entry.headerSmall">Expediente Oficial</span>
+        <span class="title-line title-main">Whateley</span>
+        <span class="title-line title-meta" data-i18n="entry.headerMeta">Caso Blackmoor · 1889</span>
+      </h1>
+
+      <p class="entry-subtitle" data-i18n="entry.subtitle">
+        Documento recopilado por orden de Su Majestad. Acceso restringido al portador.
+      </p>
+
+      <div class="entry-lang">
+        <button type="button" class="lang-btn is-active" data-lang="es" aria-label="Español">ES</button>
+        <span class="lang-divider">·</span>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+      </div>
+
+      <button type="button" id="open-file" class="entry-cta" data-go="hub">
+        <span data-i18n="entry.cta">ABRIR EXPEDIENTE</span>
+        <span class="cta-arrow" aria-hidden="true">&#x276F;</span>
+      </button>
+
+      <button type="button" id="sound-toggle" class="sound-toggle" aria-label="Sonido">
+        <span class="sound-on" aria-hidden="true">♪</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: HUB                                  -->
+  <!-- ========================================== -->
+  <section class="route route-hub" data-route="hub">
+    <div class="page-bg"></div>
+
+    <header class="page-header">
+      <div class="page-header-meta">
+        <span class="meta-classified" data-i18n="common.classified">CLASIFICADO</span>
+        <span class="meta-divider">·</span>
+        <span data-i18n="entry.headerMeta">Caso Blackmoor · 1889</span>
+      </div>
+      <h1 class="page-title" data-i18n="hub.title">Mesa del Expediente</h1>
+      <p class="page-subtitle" data-i18n="hub.subtitle">…</p>
+    </header>
+
+    <nav class="hub-grid" id="hub-grid"><!-- Renderizado por JS --></nav>
+
+    <footer class="page-footer">
+      <p class="page-footer-note" data-i18n="hub.footerNote">…</p>
+      <div class="hub-lang">
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+        <span class="lang-divider">·</span>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: DECRETO                              -->
+  <!-- ========================================== -->
+  <section class="route route-decreto" data-route="decreto">
+    <div class="page-bg"></div>
+
+    <a href="#hub" class="back-link" data-go="hub">
+      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
+      <span data-i18n="common.back">Volver al expediente</span>
+    </a>
+
+    <article class="paper paper-official">
+      <div class="paper-corner-crest" aria-hidden="true">
+        <div class="crest-crown">♛</div>
+      </div>
+
+      <header class="paper-header">
+        <p class="paper-eyebrow" data-i18n="decreto.header">…</p>
+        <h1 class="paper-title" data-i18n="decreto.title">Decreto Real</h1>
+      </header>
+
+      <div class="paper-body" id="decreto-body"><!-- Renderizado por JS --></div>
+
+      <footer class="paper-footer">
+        <div class="paper-signature paper-signature-royal" data-i18n="decreto.signature">Victoria R.</div>
+        <div class="paper-seal-wax" aria-hidden="true">
+          <div class="seal-wax-inner" data-i18n="decreto.stamp">POR LA CORONA</div>
+        </div>
+        <p class="paper-annotation" data-i18n="decreto.annotation">…</p>
+      </footer>
+    </article>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: INFORME                              -->
+  <!-- ========================================== -->
+  <section class="route route-informe" data-route="informe">
+    <div class="page-bg"></div>
+
+    <a href="#hub" class="back-link" data-go="hub">
+      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
+      <span data-i18n="common.back">Volver al expediente</span>
+    </a>
+
+    <article class="paper paper-typed">
+      <div class="folder-tab">
+        <span data-i18n="informe.header">INFORME PRELIMINAR</span>
+      </div>
+
+      <header class="paper-header">
+        <h1 class="paper-title" data-i18n="informe.title">Informe Ashton</h1>
+        <p class="paper-subheader" data-i18n="informe.subheader">…</p>
+      </header>
+
+      <div class="paper-body paper-body-typed" id="informe-body"><!-- Renderizado por JS --></div>
+
+      <footer class="paper-footer">
+        <p class="paper-closing" data-i18n="informe.closing">…</p>
+        <div class="paper-signature paper-signature-hand" data-i18n="informe.signature">C. Ashton</div>
+      </footer>
+    </article>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: HEMEROTECA                           -->
+  <!-- ========================================== -->
+  <section class="route route-hemeroteca" data-route="hemeroteca">
+    <div class="page-bg"></div>
+
+    <a href="#hub" class="back-link" data-go="hub">
+      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
+      <span data-i18n="common.back">Volver al expediente</span>
+    </a>
+
+    <header class="page-header">
+      <h1 class="page-title" data-i18n="hemeroteca.title">Hemeroteca</h1>
+      <p class="page-subtitle" data-i18n="hemeroteca.subtitle">…</p>
+    </header>
+
+    <div class="clippings" id="hemeroteca-list"><!-- Renderizado por JS --></div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: PARROCO                              -->
+  <!-- ========================================== -->
+  <section class="route route-parroco" data-route="parroco">
+    <div class="page-bg"></div>
+
+    <a href="#hub" class="back-link" data-go="hub">
+      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
+      <span data-i18n="common.back">Volver al expediente</span>
+    </a>
+
+    <header class="page-header">
+      <h1 class="page-title" data-i18n="parroco.title">Nota del Párroco</h1>
+      <p class="page-subtitle" data-i18n="parroco.subtitle">…</p>
+    </header>
+
+    <figure class="parroco-note">
+      <div class="note-nail" aria-hidden="true"></div>
+      <blockquote class="note-quote" data-i18n="parroco.quote">…</blockquote>
+      <figcaption class="note-signature" data-i18n="parroco.signature">…</figcaption>
+    </figure>
+
+    <p class="parroco-footer" data-i18n="parroco.footer">…</p>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: MAPA                                 -->
+  <!-- ========================================== -->
+  <section class="route route-mapa" data-route="mapa">
+    <div class="page-bg"></div>
+
+    <a href="#hub" class="back-link" data-go="hub">
+      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
+      <span data-i18n="common.back">Volver al expediente</span>
+    </a>
+
+    <header class="page-header">
+      <h1 class="page-title" data-i18n="mapa.title">Mapa de Blackmoor</h1>
+      <p class="page-subtitle" data-i18n="mapa.subtitle">…</p>
+      <p class="page-instructions" data-i18n="mapa.instructions">…</p>
+    </header>
+
+    <div class="mapa-stage">
+      <svg class="mapa-svg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-label="Map of Blackmoor">
+        <defs>
+          <pattern id="paper-noise" patternUnits="userSpaceOnUse" width="6" height="6">
+            <rect width="6" height="6" fill="#d8c298" opacity="0.05"/>
+          </pattern>
+        </defs>
+        <rect x="0" y="0" width="400" height="320" fill="url(#paper-noise)"/>
+        <!-- Río -->
+        <path d="M0,210 Q80,200 130,220 T280,210 T400,200" stroke="#3a4f5a" stroke-width="3" fill="none" opacity="0.7"/>
+        <!-- Bosque -->
+        <g opacity="0.7" fill="#2f4634">
+          <circle cx="60" cy="60" r="14"/>
+          <circle cx="90" cy="50" r="11"/>
+          <circle cx="120" cy="65" r="13"/>
+          <circle cx="150" cy="55" r="10"/>
+          <circle cx="80" cy="90" r="12"/>
+          <circle cx="120" cy="95" r="14"/>
+          <circle cx="155" cy="85" r="11"/>
+          <circle cx="40" cy="95" r="10"/>
+        </g>
+        <!-- Casas marcadas -->
+        <g class="map-pin" data-loc="casas">
+          <circle cx="220" cy="170" r="9"/>
+          <text x="220" y="174" text-anchor="middle" class="pin-label">×</text>
+        </g>
+        <!-- Iglesia -->
+        <g class="map-pin" data-loc="iglesia">
+          <circle cx="180" cy="240" r="10"/>
+          <text x="180" y="245" text-anchor="middle" class="pin-label">†</text>
+        </g>
+        <!-- Posada -->
+        <g class="map-pin" data-loc="posada">
+          <circle cx="280" cy="240" r="9"/>
+          <text x="280" y="244" text-anchor="middle" class="pin-label">⌂</text>
+        </g>
+        <!-- Whateley -->
+        <g class="map-pin" data-loc="whateley">
+          <circle cx="330" cy="120" r="11"/>
+          <text x="330" y="125" text-anchor="middle" class="pin-label">W</text>
+        </g>
+        <!-- Bosque pin -->
+        <g class="map-pin" data-loc="bosque">
+          <circle cx="100" cy="75" r="10"/>
+          <text x="100" y="79" text-anchor="middle" class="pin-label">✦</text>
+        </g>
+        <!-- Compass -->
+        <g transform="translate(360,40)" opacity="0.7">
+          <circle r="14" fill="none" stroke="#a07a3a" stroke-width="0.8"/>
+          <text y="-16" text-anchor="middle" font-size="9" fill="#a07a3a">N</text>
+          <line x1="0" y1="-10" x2="0" y2="10" stroke="#a07a3a" stroke-width="0.8"/>
+          <line x1="-10" y1="0" x2="10" y2="0" stroke="#a07a3a" stroke-width="0.8"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="mapa-locations" id="mapa-locations"><!-- Renderizado por JS --></div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: CARTA                                -->
+  <!-- ========================================== -->
+  <section class="route route-carta" data-route="carta">
+    <div class="page-bg"></div>
+
+    <a href="#hub" class="back-link" data-go="hub">
+      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
+      <span data-i18n="common.back">Volver al expediente</span>
+    </a>
+
+    <article class="paper paper-letter">
+      <header class="paper-header">
+        <p class="paper-eyebrow" data-i18n="carta.header">…</p>
+        <h1 class="paper-title" data-i18n="carta.title">Correspondencia privada</h1>
+        <p class="paper-subheader" data-i18n="carta.subheader">…</p>
+      </header>
+
+      <div class="paper-body paper-body-handwritten" id="carta-body"><!-- Renderizado por JS --></div>
+
+      <footer class="paper-footer">
+        <div class="paper-signature paper-signature-hand" data-i18n="carta.signature">Edward Hartwell</div>
+        <p class="paper-ps" data-i18n="carta.ps">…</p>
+      </footer>
+    </article>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- ROUTE: ARCHIVO                              -->
+  <!-- ========================================== -->
+  <section class="route route-archivo" data-route="archivo">
+    <div class="page-bg"></div>
+
+    <a href="#hub" class="back-link" data-go="hub">
+      <span class="back-arrow" aria-hidden="true">&#x276E;</span>
+      <span data-i18n="common.back">Volver al expediente</span>
+    </a>
+
+    <header class="page-header">
+      <h1 class="page-title" data-i18n="archivo.title">Archivo Restringido</h1>
+      <p class="page-subtitle" data-i18n="archivo.subtitle">…</p>
+    </header>
+
+    <!-- Cofre cerrado -->
+    <div class="archivo-locked" id="archivo-locked">
+      <h2 class="cofre-heading" data-i18n="archivo.lockedHeading">Cofre Sellado</h2>
+      <p class="cofre-body" data-i18n="archivo.lockedBody">…</p>
+
+      <div class="cofre">
+        <div class="cofre-lid"></div>
+        <div class="cofre-front">
+          <div class="cofre-symbols" id="cofre-symbols">
+            <button type="button" class="cofre-symbol" data-symbol="hexagono" aria-label="Hexágono">
+              <svg viewBox="0 0 60 60"><polygon points="30,5 53,18 53,42 30,55 7,42 7,18" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+            </button>
+            <button type="button" class="cofre-symbol" data-symbol="circulo" aria-label="Círculo">
+              <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+            </button>
+            <button type="button" class="cofre-symbol" data-symbol="pentagono" aria-label="Pentágono">
+              <svg viewBox="0 0 60 60"><polygon points="30,5 55,23 45,52 15,52 5,23" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+            </button>
+            <button type="button" class="cofre-symbol" data-symbol="triangulo" aria-label="Triángulo">
+              <svg viewBox="0 0 60 60"><polygon points="30,8 54,52 6,52" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+            </button>
+            <button type="button" class="cofre-symbol" data-symbol="cuadrado" aria-label="Cuadrado">
+              <svg viewBox="0 0 60 60"><rect x="9" y="9" width="42" height="42" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <ol class="cofre-progress" id="cofre-progress">
+        <li class="cofre-slot"></li>
+        <li class="cofre-slot"></li>
+        <li class="cofre-slot"></li>
+        <li class="cofre-slot"></li>
+        <li class="cofre-slot"></li>
+      </ol>
+
+      <p class="cofre-msg" id="cofre-msg" role="status" aria-live="polite"></p>
+
+      <button type="button" class="cofre-reset is-hidden" id="cofre-reset" data-i18n="archivo.reset">Reintentar</button>
+    </div>
+
+    <!-- Cofre abierto -->
+    <div class="archivo-unlocked is-hidden" id="archivo-unlocked">
+      <h2 class="archivo-unlocked-title" data-i18n="archivo.unlocked.title">Cartas Recobradas</h2>
+
+      <article class="paper paper-letter paper-letter-trembling">
+        <header class="paper-header">
+          <p class="paper-eyebrow" data-i18n="archivo.unlocked.letter.header">…</p>
+          <p class="paper-subheader" data-i18n="archivo.unlocked.letter.subheader">…</p>
+        </header>
+        <div class="paper-body paper-body-handwritten" id="whateley-body"><!-- Renderizado por JS --></div>
+        <footer class="paper-footer">
+          <div class="paper-signature paper-signature-hand" data-i18n="archivo.unlocked.letter.signature">Aldous</div>
+        </footer>
+      </article>
+
+      <article class="paper paper-attached">
+        <header class="paper-header">
+          <p class="paper-eyebrow" data-i18n="archivo.unlocked.attached.header">Hoja Adjunta</p>
+          <p class="paper-subheader" data-i18n="archivo.unlocked.attached.subheader">…</p>
+        </header>
+
+        <div class="attached-grid">
+          <figure class="attached-fig attached-drawing">
+            <div class="attached-placeholder attached-placeholder-drawing" aria-hidden="true">
+              <svg viewBox="0 0 200 200">
+                <g stroke="#3a2a18" stroke-width="1.2" fill="none" opacity="0.85" transform="translate(100,110)">
+                  <path d="M-30,-40 Q-15,-65 0,-60 Q15,-65 30,-40 Q45,-25 40,5 Q50,30 35,55 Q15,75 0,70 Q-15,75 -35,55 Q-50,30 -40,5 Q-45,-25 -30,-40 Z"/>
+                  <circle cx="-12" cy="-25" r="3" fill="#3a2a18"/>
+                  <circle cx="12" cy="-25" r="3" fill="#3a2a18"/>
+                  <path d="M-25,40 Q-15,55 -5,40"/>
+                  <path d="M5,40 Q15,55 25,40"/>
+                  <path d="M-15,15 Q0,25 15,15"/>
+                  <path d="M-45,-10 Q-65,5 -55,30"/>
+                  <path d="M45,-10 Q65,5 55,30"/>
+                  <path d="M-50,40 Q-65,55 -50,70"/>
+                  <path d="M50,40 Q65,55 50,70"/>
+                </g>
+              </svg>
+            </div>
+            <figcaption class="attached-caption" data-i18n="archivo.unlocked.attached.captionDrawing">…</figcaption>
+          </figure>
+
+          <figure class="attached-fig attached-map">
+            <div class="attached-placeholder attached-placeholder-map" aria-hidden="true">
+              <svg viewBox="0 0 200 200">
+                <rect x="0" y="0" width="200" height="200" fill="#d8c298" opacity="0.1"/>
+                <path d="M20,160 Q70,140 120,150 T180,130" stroke="#5a3a18" stroke-width="1.4" fill="none" opacity="0.7"/>
+                <path d="M30,40 Q60,30 90,55 T160,60" stroke="#5a3a18" stroke-width="1" fill="none" opacity="0.5" stroke-dasharray="3,3"/>
+                <g fill="#2f4634" opacity="0.6">
+                  <circle cx="50" cy="80" r="6"/>
+                  <circle cx="65" cy="75" r="5"/>
+                  <circle cx="80" cy="85" r="6"/>
+                </g>
+                <g transform="translate(140,100)">
+                  <line x1="-8" y1="-8" x2="8" y2="8" stroke="#a8311a" stroke-width="2.4"/>
+                  <line x1="8" y1="-8" x2="-8" y2="8" stroke="#a8311a" stroke-width="2.4"/>
+                </g>
+                <text x="155" y="105" font-size="8" fill="#a8311a" font-style="italic">?</text>
+              </svg>
+            </div>
+            <figcaption class="attached-caption" data-i18n="archivo.unlocked.attached.captionMap">…</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Audio ambiente -->
+  <audio id="ambient-audio" loop preload="none"></audio>
+
+  <script src="i18n.js" defer></script>
+  <script src="main.js" defer></script>
+</body>
+</html>

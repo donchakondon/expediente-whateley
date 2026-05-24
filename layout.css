@@ -1,0 +1,222 @@
+/* =============================
+   LAYOUT — Routing y pantallas
+   ============================= */
+
+/* ---- Routing system ----------------- */
+.route {
+  display: none;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.route.is-active {
+  display: block;
+}
+
+/* ---- Entry (idéntico al diseño original) ---- */
+.route-entry {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 35%, #2a1d10 0%, #1a1108 45%, #0d0905 100%),
+    var(--color-bg-deep);
+}
+.route-entry.is-active {
+  display: flex;
+}
+
+.entry-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 80%, rgba(0,0,0,0.85) 100%);
+  z-index: 1;
+}
+
+.entry-dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 22% 18%, rgba(201,168,90,0.10) 0px, transparent 2px),
+    radial-gradient(circle at 78% 62%, rgba(201,168,90,0.08) 0px, transparent 2px),
+    radial-gradient(circle at 35% 88%, rgba(201,168,90,0.07) 0px, transparent 2px),
+    radial-gradient(circle at 60% 30%, rgba(201,168,90,0.05) 0px, transparent 2px);
+  background-size: 250px 250px, 320px 320px, 200px 200px, 280px 280px;
+  z-index: 2;
+}
+
+.entry-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: var(--sp-xl) var(--sp-lg);
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-md);
+}
+
+@media (min-width: 600px) {
+  .entry-content { max-width: 520px; padding: var(--sp-xl); gap: var(--sp-lg); }
+}
+@media (min-width: 1024px) {
+  .entry-content { max-width: 640px; }
+}
+
+/* ---- Páginas internas (resto de rutas) ---- */
+.route-hub,
+.route-decreto,
+.route-informe,
+.route-hemeroteca,
+.route-parroco,
+.route-mapa,
+.route-carta,
+.route-archivo {
+  background:
+    radial-gradient(ellipse at 50% 25%, #2a1d10 0%, #1a1108 50%, #0d0905 100%),
+    var(--color-bg-deep);
+  padding: 64px var(--sp-md) var(--sp-xl);
+}
+
+@media (min-width: 600px) {
+  .route-hub, .route-decreto, .route-informe, .route-hemeroteca,
+  .route-parroco, .route-mapa, .route-carta, .route-archivo {
+    padding: 72px var(--sp-lg) var(--sp-xl);
+  }
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle at 22% 18%, rgba(201,168,90,0.06) 0px, transparent 2px),
+    radial-gradient(circle at 78% 62%, rgba(201,168,90,0.05) 0px, transparent 2px),
+    radial-gradient(circle at 35% 88%, rgba(201,168,90,0.04) 0px, transparent 2px);
+  background-size: 250px 250px, 320px 320px, 200px 200px;
+}
+
+.back-link {
+  position: absolute;
+  top: var(--sp-md);
+  left: var(--sp-md);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  color: var(--color-gold);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.05em;
+  padding: 8px 12px;
+  border: 1px solid rgba(201, 168, 90, 0.2);
+  border-radius: var(--radius-sm);
+  background: rgba(13, 9, 5, 0.5);
+  z-index: 10;
+}
+.back-link:hover { color: var(--color-paper-warm); border-color: var(--color-gold); }
+.back-arrow { font-size: 1.1em; }
+
+.page-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--sp-lg);
+}
+
+.page-header-meta {
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.25em;
+  color: var(--color-gold-soft);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-md);
+}
+.meta-classified {
+  color: var(--color-lacre);
+  font-weight: 600;
+}
+.meta-divider {
+  margin: 0 6px;
+  opacity: 0.6;
+}
+
+.page-title {
+  font-family: var(--font-title);
+  font-weight: 500;
+  font-size: var(--fs-3xl);
+  line-height: 1.1;
+  color: var(--color-paper-light);
+  margin-bottom: var(--sp-sm);
+  letter-spacing: 0.01em;
+}
+@media (min-width: 600px) { .page-title { font-size: var(--fs-4xl); } }
+
+.page-subtitle {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--fs-md);
+  color: var(--color-paper-warm);
+  opacity: 0.85;
+  max-width: 540px;
+  margin: 0 auto var(--sp-sm);
+}
+
+.page-instructions {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--color-gold);
+  margin-top: var(--sp-sm);
+}
+
+.page-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 640px;
+  margin: var(--sp-xl) auto 0;
+  padding-top: var(--sp-lg);
+  border-top: 1px solid rgba(201, 168, 90, 0.15);
+}
+
+.page-footer-note {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--fs-xs);
+  color: var(--color-gold-soft);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--sp-md);
+}
+
+.hub-lang {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+/* ---- Animación de transición entre rutas ---- */
+.route.is-active {
+  animation: routeFadeIn 0.55s ease-out;
+}
+@keyframes routeFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route.is-active { animation: none; }
+}
+
+.is-hidden { display: none !important; }

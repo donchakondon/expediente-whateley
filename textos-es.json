@@ -1,0 +1,197 @@
+{
+  "common": {
+    "siteTitle": "Expediente Whateley",
+    "classified": "CLASIFICADO",
+    "back": "Volver al expediente",
+    "home": "Inicio"
+  },
+  "entry": {
+    "headerSmall": "Expediente Oficial",
+    "headerMeta": "Caso Blackmoor · 1889",
+    "subtitle": "Documento recopilado por orden de Su Majestad. Acceso restringido al portador.",
+    "cta": "ABRIR EXPEDIENTE"
+  },
+  "hub": {
+    "title": "Mesa del Expediente",
+    "subtitle": "Documentos compilados por la Oficina de Investigaciones Especiales de la Corona. Toque cualquier pieza para examinarla.",
+    "footerNote": "Ningún documento debe abandonar este expediente sin autorización expresa de Su Majestad.",
+    "items": {
+      "decreto": { "label": "Decreto Real", "hint": "Autorización de Su Majestad" },
+      "informe": { "label": "Informe Ashton", "hint": "Investigación preliminar" },
+      "hemeroteca": { "label": "Hemeroteca", "hint": "Recortes de prensa, 1889" },
+      "parroco": { "label": "Nota del Párroco", "hint": "Hallada clavada en la puerta" },
+      "mapa": { "label": "Mapa de Blackmoor", "hint": "Topografía y ubicaciones" },
+      "carta": { "label": "Correspondencia privada", "hint": "Carta de Edward Hartwell" },
+      "archivo": { "label": "Archivo Restringido", "hint": "Acceso únicamente al portador del cifrado" }
+    }
+  },
+  "decreto": {
+    "title": "Decreto Real",
+    "header": "Por la gracia de Dios y la voluntad del Reino",
+    "stamp": "POR LA CORONA",
+    "body": [
+      "Nós, Victoria, por la Gracia de Dios, Reina del Reino Unido de Gran Bretaña e Irlanda, Defensora de la Fe, en uso de las prerrogativas que Nos competen y a través de la Oficina de Investigaciones Especiales,",
+      "ORDENAMOS:",
+      "Primero. Que se autorice a la presente delegación de investigadores el acceso pleno e inmediato a la comarca de Blackmoor, sus dependencias, parroquia, posada y cualquier propiedad inscrita a nombre de la familia Whateley, incluido sin restricción el mausoleo familiar.",
+      "Segundo. Que ninguna autoridad civil, eclesiástica o privada podrá impedir, demorar o condicionar dicho acceso. Toda obstrucción será considerada desacato a la Corona y juzgada conforme.",
+      "Tercero. Que los portadores de este Decreto quedan facultados para emplear cuanta fuerza prudente sea menester en defensa de su persona y de la integridad de su misión.",
+      "Cuarto. Que del resultado de su labor habrán de rendir cuenta directa y reservada al Despacho que suscribe.",
+      "Dado en Westminster, a los días corrientes del año del Señor de mil ochocientos ochenta y nueve."
+    ],
+    "signature": "Victoria R.",
+    "annotation": "Que Dios guarde a quienes osen mirar lo que otros han preferido olvidar."
+  },
+  "informe": {
+    "title": "Informe Ashton",
+    "header": "INFORME PRELIMINAR — CASO BLACKMOOR",
+    "subheader": "Redactado por el Dr. Cornelius Ashton, agente de la Oficina de Investigaciones Especiales. Remitido en agosto de 1889. Considerado parcialmente ilegible.",
+    "sections": [
+      {
+        "heading": "Llegada al pueblo",
+        "body": "Llegué a Blackmoor con luz de tarde y la impresión de haber atravesado una cortina invisible. Los caballos se detuvieron solos antes del puente y costó volver a hacerlos andar. El cochero no quiso seguir. Pagué el doble y tampoco. Entré a pie."
+      },
+      {
+        "heading": "Primeras observaciones",
+        "body": "El pueblo no está vacío. Hay gente. Comen, trabajan, saludan. Pero saludan demasiado tarde, como si tuvieran que recordar que se saluda. La mujer del molinero estuvo dos horas mirando al cielo sin moverse. Cuando le pregunté qué veía, sonrió y dijo: «aún no llega»."
+      },
+      {
+        "heading": "Los desaparecidos",
+        "body": "He documentado siete casos en cuatro semanas. Todos vuelven a los tres o cuatro días, exhaustos, con tierra bajo las uñas y sin recuerdos del intervalo. El médico del pueblo, un tal Pritchard, los examina y los devuelve a casa sin más. Cuando pregunté por los análisis, me respondió que «no hace falta tocar lo que no quiere ser tocado»."
+      },
+      {
+        "heading": "La iglesia",
+        "body": "La iglesia está cerrada con cadenas. El párroco, el reverendo Hollis, abandonó el pueblo hace dos meses. Dejó una nota en la puerta. La he recogido y adjuntado al expediente. No quiero transcribirla aquí."
+      },
+      {
+        "heading": "Las procesiones",
+        "body": "Tres veces, siempre entre la una y las tres de la madrugada, he visto a una columna de vecinos atravesar el pueblo en dirección al bosque. Llevaban velas. Nadie hablaba. Los seguí hasta el lindero y allí me detuve, porque algo dentro de mí —y no exagero— me dijo que si daba un paso más no volvería siendo el mismo."
+      },
+      {
+        "heading": "Thomas",
+        "body": "El criado de los Whateley, Thomas, me cerró la puerta de la casa al tercer día. Antes había sido cordial. Esa última vez sus ojos no parpadearon mientras hablaba conmigo. Su voz era la suya. Lo demás no."
+      },
+      {
+        "heading": "Confesión final",
+        "body": "Llevo once días sin dormir más de tres horas seguidas. Oigo cosas en mi propia habitación. Me cuesta recordar el nombre de mi esposa. Esta mañana me sorprendí escribiendo en este informe palabras que no recuerdo haber pensado, en una caligrafía que no es la mía. He decidido marcharme. Suplico a quien lea esto que no demore la intervención. Ningún hombre debería entrar solo a Blackmoor.",
+        "emphasis": true
+      }
+    ],
+    "closing": "Lo que hay en Blackmoor no se ve. Se siente. Y cuando lo sientes, ya estás dentro.",
+    "signature": "C. Ashton"
+  },
+  "hemeroteca": {
+    "title": "Hemeroteca",
+    "subtitle": "Recortes recopilados de la prensa nacional y local entre marzo y agosto de 1889.",
+    "clippings": [
+      {
+        "source": "The Times — Londres, 14 de mayo de 1889",
+        "headline": "Extraños sucesos en una comarca de los Cotswolds",
+        "body": "Vecinos de la pequeña comarca de Blackmoor refieren episodios inexplicables en los últimos meses. Un corresponsal anónimo describe «procesiones nocturnas con velas» y un «silencio impropio incluso para una aldea inglesa»."
+      },
+      {
+        "source": "Gloucester Echo — 02 de junio de 1889",
+        "headline": "El párroco abandona Blackmoor sin explicación",
+        "body": "El reverendo Albert Hollis, párroco durante diecisiete años, ha abandonado su iglesia. Allegados aseguran que dejó una nota fijada a la puerta del templo. Las autoridades eclesiásticas han declinado hacer comentarios."
+      },
+      {
+        "source": "The Daily Chronicle — 19 de julio de 1889",
+        "headline": "Vecinos desaparecen y reaparecen sin recuerdos",
+        "body": "Al menos siete personas han desaparecido durante varios días para regresar después en estado de confusión. Ninguna recuerda dónde estuvo. Un médico local ha pedido «no insistir en el asunto»."
+      },
+      {
+        "source": "Catholic Herald — 11 de agosto de 1889",
+        "headline": "La Iglesia habla de herejía donde antes hablaba de fe",
+        "body": "Un boletín diocesano hace referencia, sin nombrar lugares, a «prácticas que no pueden ser toleradas en suelo cristiano». Fuentes próximas al obispado señalan a Blackmoor como el origen de la inquietud."
+      }
+    ]
+  },
+  "parroco": {
+    "title": "Nota del Párroco",
+    "subtitle": "Hallada clavada en la puerta de la parroquia de Blackmoor el 28 de junio de 1889. Recogida por el Dr. Ashton.",
+    "quote": "Dios ha dejado de escuchar en este lugar.",
+    "signature": "—Reverendo A. Hollis",
+    "footer": "El clavo que sujetaba la nota a la puerta fue extraído con dificultad. La madera presentaba marcas de profundidad incompatible con su grosor."
+  },
+  "mapa": {
+    "title": "Mapa de Blackmoor",
+    "subtitle": "Levantamiento manuscrito. Ubicaciones marcadas conforme a los testimonios recabados por el Dr. Ashton.",
+    "instructions": "Toque cada ubicación para ampliar las observaciones del expediente.",
+    "locations": [
+      {
+        "id": "iglesia",
+        "label": "Iglesia de Santa Brígida",
+        "note": "Cerrada con cadenas desde junio. La nota del reverendo Hollis fue retirada de la puerta principal. Vecinos refieren cánticos en latín mal pronunciado durante la madrugada, pese al edificio estar vacío."
+      },
+      {
+        "id": "posada",
+        "label": "Posada del Ciervo Negro",
+        "note": "Único establecimiento abierto al forastero. El posadero, un tal Crowe, no acepta huéspedes después del anochecer. Las habitaciones del segundo piso permanecen permanentemente cerradas «por reformas» que nadie ha visto comenzar."
+      },
+      {
+        "id": "whateley",
+        "label": "Propiedad Whateley",
+        "note": "Casa señorial de tres plantas, biblioteca, jardines descuidados. Mausoleo familiar al fondo del jardín, separado por seto de tejo. El Decreto Real autoriza acceso pleno, incluido el mausoleo. Servicio reducido a un solo criado: Thomas."
+      },
+      {
+        "id": "bosque",
+        "label": "Bosque de Blackmoor",
+        "note": "Linde norte. Las procesiones nocturnas se internan por aquí. El Dr. Ashton se detuvo en este punto. No se aconseja seguir a un grupo más allá del primer claro."
+      },
+      {
+        "id": "casas",
+        "label": "Casas marcadas",
+        "note": "Hogares de los siete desaparecidos documentados. Todas presentan en común una cruz invertida grabada en el dintel, hecha aparentemente con uña."
+      }
+    ]
+  },
+  "carta": {
+    "title": "Correspondencia privada",
+    "header": "De Edward Hartwell a un amigo de absoluta confianza",
+    "subheader": "Carta personal. No forma parte del Decreto. Se incluye por su pertinencia al caso.",
+    "body": [
+      "Mi querido amigo,",
+      "Si esta carta llega a tus manos, significa que mis últimos esfuerzos por que se atendiera el asunto han fracasado y que alguien, por fin, ha decidido tomarse en serio lo que ocurre en Blackmoor.",
+      "Aldous fue mi amigo. No el lord. El hombre. Y un hombre no se quita la vida sin haber sido empujado a hacerlo por algo que ya no era humano. Lo que hay en su casa —en el mausoleo, sobre todo— no es de este lado.",
+      "He dejado, en su biblioteca, dentro de un pequeño cofre cerrado, lo único que conservé de él. No es gran cosa: una nota, un objeto. Pero me consta que lo necesitarás.",
+      "El cofre se abre con una combinación de tres cifras. Si has leído con atención mis cartas anteriores, sabrás que Aldous y yo nos escribíamos siempre con una cifra al pie. La última que recibí, fechada el día antes de su muerte, llevaba el número 314.",
+      "Úsalo si te ves en aprietos. Y, te lo ruego, no le cuentes a nadie que te lo dije.",
+      "Sé que este lugar te pondrá a prueba. Sé también que no estás solo. Quien firma este Decreto sabe lo que hace. Y los que hayas elegido como compañeros de viaje sabrán estar a la altura.",
+      "Cuídate. Y cuida de los tuyos.",
+      "Tu amigo, hasta el final,"
+    ],
+    "signature": "Edward Hartwell",
+    "ps": "P. D. — Si encuentras a Thomas, no le mires a los ojos demasiado tiempo. Hace ya semanas que no es Thomas."
+  },
+  "archivo": {
+    "title": "Archivo Restringido",
+    "subtitle": "Acceso únicamente al portador del cifrado obtenido en la Sala.",
+    "lockedHeading": "Cofre Sellado",
+    "lockedBody": "Este compartimiento permanece cerrado por un dispositivo de cinco símbolos. Solo quien haya activado el cubo en la sala conocerá el orden correcto. Toque los símbolos en la secuencia adecuada.",
+    "errorMsg": "Combinación incorrecta. El cofre permanece cerrado.",
+    "successMsg": "Cofre abierto. Acceda con prudencia.",
+    "reset": "Reintentar",
+    "unlocked": {
+      "title": "Cartas Recobradas",
+      "letter": {
+        "header": "Carta personal de Lord Aldous Whateley",
+        "subheader": "Hallada en el doble fondo del escritorio del estudio. Letra temblorosa, varias correcciones, restos de cera.",
+        "body": [
+          "Edward, viejo amigo,",
+          "Si lees esto, ya estaré muerto. No me apena. He tenido tiempo de hacer las paces con la idea, aunque no con la causa.",
+          "Tenía razón Azrael. No me reí a tiempo de las cosas serias y me reí demasiado de él, que era el único que vigilaba de verdad. Lo despedí pensándole supersticioso. Hoy sé que era el último guardián que me quedaba en esta casa, y yo, por orgullo, le cerré la puerta.",
+          "Te escribo sobre Thomas. Tienes que saberlo. Lo que se sienta a mi mesa no es Thomas. Quedan gestos suyos, sí: la forma de coger la jarra, el modo en que carraspea antes de hablar. Pero detrás de los ojos hay otra cosa que le susurra. Le promete libertad a cambio de pequeñas obediencias. Y Thomas, mi pobre Thomas, las cumple.",
+          "Sé cómo terminará. No por revelación, ni por sueño: por lógica. Lo que se ha apoderado de él me necesita callado. Y a Thomas le bastará un instante de manos firmes para hacerlo. Yo no le tendré miedo. Le he conocido desde niño. Se merece que le mire a la cara cuando ocurra, aunque no sea él quien me mire de vuelta.",
+          "Perdóname tú, que sí me querías sin condiciones. Por las veces que no te creí. Por las veces que dudé de ti. Por reírme de Azrael. Por reírme también de mí mismo cuando no tocaba.",
+          "Gracias por todo. Y por lo que vendrá."
+        ],
+        "signature": "Aldous"
+      },
+      "attached": {
+        "header": "Hoja Adjunta",
+        "subheader": "Doblada dentro de la carta. Dibujo a lápiz tembloroso. Anotaciones rotas. Whateley pide expresamente que no se mire mucho rato.",
+        "captionDrawing": "Dibujo sin firmar. No mirar más de lo necesario.",
+        "captionMap": "Croquis parcial. La X no figura en ningún mapa oficial."
+      }
+    }
+  }
+}
